@@ -1,0 +1,94 @@
+/.metadata/
+
+
+
+# KH extras
+/bu02-mongoose-dashboard
+/bu02-mongoose-dashboard/
+*.lnk
+*trashme*
+*.docx
+*HELP.md
+
+
+
+# generated files etc
+.last_success_revision
+*.d
+*.depend
+*.pc
+*.P
+*.[oa]
+*.l[oa]
+*.so
+*.so.*
+*.dylib
+*.lineno
+*.py[co]
+*.ver
+*.rej
+*.orig
+*.bak
+*.apk
+*.class
+*.dwo
+
+# Windows specific generated files
+*.appx
+*.cer
+*.exp
+*.ilk
+*.ncb
+*.pdb
+*.suo
+*.sdf
+*.opensdf
+*.vcproj.*.user
+*.vcxproj.*.user
+*.vcxproj.user
+*.obj
+*.idb
+*ReSharper*
+*.idb
+*.diagsession
+
+
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# VS git tools doesn't work for true out of tree builds and it's
+# useful to be able to work on multiple configs
+/build*/
+
+#ignore java binaries
+# Ignore bin dir
+bin/
+# or
+/bin/
+
+bin/com/hervey/app/MyUnit.class
+bin/com/hervey/app/MyUnitTest.class
+.vscode/settings.json
+*settings.json

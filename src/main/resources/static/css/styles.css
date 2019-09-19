@@ -1,0 +1,370 @@
+*{
+	margin:0;
+	padding:0;
+	font-family:"Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+	box-sizing:border-box;
+}
+
+
+table, th, td {
+	border: 1px solid black;
+  }
+
+.container{
+	width:80%;
+	margin:30px auto 30px auto;
+	background-color: whitesmoke;
+}
+
+a{
+  color:blue;
+  display: inline-block;
+}
+
+.bad{
+	font-size:0.75em;
+	color:red;
+}
+
+.good{
+	font-size:0.75em;
+	color:green;
+}
+
+
+.form-group{
+	padding:20px;
+	margin:20px;
+}
+
+input[type=text], input[type=password], input[type=date], textarea {
+  width: 100%;
+  padding: 12px;
+  font-size:1em;
+  border: 2px solid black;
+  resize: vertical;
+}
+
+.location input[type=text]{
+	width:50%;
+}
+
+select{
+	display:inline-block;
+	padding: 12px;
+  	font-size:1em;
+ 	border: 2px solid black;
+  	resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+xxinput[type=submit] {
+	margin-top:10px;
+  padding: 12px 20px;
+  border: 2px solid black;
+  font-size:1em;
+  box-shadow:2px 3px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  /*background-color: #45a049; */
+}
+
+.TwoLetterState {
+	font-size: 60%;
+	width: 100%;
+	padding-top: 10%;
+	padding-bottom: 10%;
+	padding-left: 0%;
+	padding-right: 0%;
+	height: 100%;
+}
+
+.StatefloatRight {
+	float: right;
+	margin-top: 6px;
+	width: 40%;
+
+}
+
+.col {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+}
+
+.col-5 {
+	float: left;
+	width: 5%;
+	margin-top: 6px;
+  }
+
+.col-10 {
+	float: left;
+	width: 10%;
+	margin-top: 6px;
+  }
+
+.col-20 {
+  float: left;
+  width: 20%;
+  margin-top: 6px;
+}
+
+.col-30 {
+	float: left;
+	width: 30%;
+	margin-top: 6px;
+  }
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-35 {
+	float: left;
+	width: 35%;
+	margin-top: 6px;
+  }
+
+.col-40{
+	float:left;
+	width:40%;
+	margin-top:40px;
+}
+
+.col-50 {
+	float: left;
+	width: 50%;
+	margin-top: 6px;
+  }
+
+  .col-70 {
+	float: left;
+	width: 70%;
+	margin-top: 6px;
+  }
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+.col-80 {
+  float: left;
+  width: 80%;
+  margin-top: 6px;
+}
+
+
+
+
+
+fieldset{
+	padding:20px;
+	margin:20px;
+}
+
+
+
+/* Clear floats after the columns */
+
+.row {
+	/*margin-right: -15px;
+	margin-left: -15px;*/
+   }
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+  margin-bottom:5px;
+}
+
+.right-link{
+	float:right;
+	color:blue;
+	margin-right: 5px;
+}
+
+.table-group p{
+	margin: 40px 0px 10px 0px;
+}
+
+.tablestyle {
+  border-collapse: collapse;
+  border:2px solid black;
+  width: 80%;
+}
+
+.tablestyle td, .tablestyle th {
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  border-right:2px solid black;
+  padding: 8px;
+}
+
+.tablestyle tr:nth-child(even){background-color: #f2f2f2;}
+
+.tablestyle tr:hover {background-color: #ddd;}
+
+.tablestyle th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: grey;
+}
+
+.event-info{
+	margin: 30px 0px 30px 0px;
+}
+
+.message-wall{
+	padding:10px;
+	margin:30px 0px 30px 0px;
+	border:2px solid black;
+	height:200px;
+	overflow-y:scroll;
+}
+
+.message-wall p{
+	margin-bottom:10px;
+}
+
+h3{
+	margin-top:30px;
+}
+
+
+/* <p><button type="submit" class="link"><span>Hello there I am a button</span></button></p> */
+/* turns button into link per https://blog.natbat.net/post/46614475051/styling-buttons-as-links */
+xxbutton.link {
+	font-family: "Verdana" sans-serif;
+	font-size: 1em;
+	text-align: left;
+	color: blue;
+	background: none;
+	margin: 0;
+	padding: 0;
+	border: none;
+	cursor: pointer;
+}
+
+xx.submitlink {
+	font-family: "Verdana" sans-serif;
+	font-size: 1em;
+	text-align: left;
+	color: blue;
+	background: none;
+	margin: 0;
+	padding: 0;
+	border: none;
+	cursor: pointer;
+}
+
+.normal-link{
+	color:blue;
+	border:none;
+	text-decoration:underline;
+	font-size:1em;
+	display:inline-block;
+	background-color: white;
+}
+
+.col {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+}
+
+.submit-btn {
+	margin-top:10px;
+	padding: 12px 20px;
+	border-radius:15px;
+	background-color:grey;
+	color:white;
+	font-style:bolder;
+	text-decoration:none;
+	font-size:1em;
+	cursor: pointer;
+	float: right;
+  }
+
+
+.floatLeft {
+	float: left;
+	
+	
+}
+
+
+
+/**Below for fun and learning*/
+
+.topSection{
+	border: 1px solid black;
+	min-height: 50px;
+	width:95%;
+	margin:30px auto 30px auto;
+	background-color: whitesmoke;
+}
+
+.middleSection{
+	width:100%;
+	min-height: 200px;
+	border: 1px solid black;
+	background-color: lightgreen;
+	display: inline-block;
+
+
+}
+
+
+
+.leftSide {
+	width:80%;
+	float:left;
+	border: 1px solid black;
+	display: inline-block;
+	background-color: pink;
+
+}
+
+
+.rightSide{
+	padding-left: 10px;
+	font-size: 12px;
+	width:20%;
+	float:right;
+	border: 1px solid black;
+	display: inline-block;
+
+
+}
+
+.allMenuItems{
+	margin-left:10px;
+}
+
+.menuItems{
+	margin-left:35px;
+}
+
+.eventSide {
+	background-color: rgb(184, 184, 255);
+
+}
+
+.messageSide {
+	background-color: rgb(149, 255, 149);
+
+}

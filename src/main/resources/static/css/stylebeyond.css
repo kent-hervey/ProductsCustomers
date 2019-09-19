@@ -1,0 +1,26 @@
+.topSection{
+	width:95%;
+	margin:30px auto 30px auto;
+	background-color: whitesmoke;
+}
+
+.middleSection{
+	display: inline-block;
+
+
+}
+
+
+
+.leftSide {
+	display: inline-block;
+	background-color: pink;
+
+}
+
+
+.rightSide{
+	display: inline-block;
+
+
+}
