@@ -3,12 +3,16 @@
 
 
 # KH extras
-/bu02-mongoose-dashboard
-/bu02-mongoose-dashboard/
 *.lnk
 *trashme*
 *.docx
-*HELP.md
+.vscode/settings.json
+*settings.json
+.mvn/wrapper
+.settings/
+target/
+.classpath
+.project
 
 
 
@@ -88,7 +92,3 @@ bin/
 # or
 /bin/
 
-bin/com/hervey/app/MyUnit.class
-bin/com/hervey/app/MyUnitTest.class
-.vscode/settings.json
-*settings.json
