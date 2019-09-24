@@ -8,10 +8,10 @@
 *.docx
 .vscode/settings.json
 *settings.json
-.mvn/wrapper
+*.mvn/wrapper
 .settings/
 target/
-.classpath
+*.classpath
 .project
 
 
