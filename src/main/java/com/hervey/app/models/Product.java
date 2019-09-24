@@ -51,11 +51,7 @@ public class Product {
 	}
 	
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "products_customers", 
-        joinColumns = @JoinColumn(name = "product_id"), 
-        inverseJoinColumns = @JoinColumn(name = "customer_id")
-    )
+    @JoinTable(name = "products_customers", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "customer_id"))
     private List<Customer> customers;
 
 	public Long getId() {

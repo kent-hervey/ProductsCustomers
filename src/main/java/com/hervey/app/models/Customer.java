@@ -53,7 +53,9 @@ public class Customer {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "products_customers", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
-	private List<Customer> products;
+	private List<Product> products;
+
+
 
 	public Long getId() {
 		return id;
@@ -111,11 +113,11 @@ public class Customer {
 		this.updatedAt = updatedAt;
 	}
 
-	public List<Customer> getProducts() {
+	public List<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(List<Customer> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 
@@ -187,12 +189,15 @@ public class Customer {
 	}
 
 	@Override
+//	public String toString() {
+//		return "Customer [id=" + id + ", name=" + name + ", location=" + location + ", contactName=" + contactName
+//				+ ", contactEmail=" + contactEmail + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+//				+ ", products=" + products + "]";
+//	}
+
 	public String toString() {
 		return "Customer [id=" + id + ", name=" + name + ", location=" + location + ", contactName=" + contactName
-				+ ", contactEmail=" + contactEmail + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
-				+ ", products=" + products + "]";
+				+ ", contactEmail=" + contactEmail + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt+ "]";
 	}
-
-	
 	
 }

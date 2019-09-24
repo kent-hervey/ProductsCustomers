@@ -14,6 +14,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="products_customers")
 public class ProductCustomer {
@@ -23,6 +25,7 @@ public class ProductCustomer {
 	
 	private String serialNumber;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date purchaseDate;
 	
     @Column(updatable=false)
