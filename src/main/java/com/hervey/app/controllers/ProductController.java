@@ -49,7 +49,7 @@ public class ProductController {
 		
 		
 
-		return"products/showProducts.jsp";
+		return"productsFiles/showProducts.jsp";
 	}
 	
 	//Do action of deleting customer from this product
@@ -113,7 +113,7 @@ public class ProductController {
 	//needs:
 	public String showCreateProduct(@ModelAttribute("product") Product product) {
 		
-		return"products/createProduct.jsp";
+		return"productsFiles/createProduct.jsp";
 	}
 	
 	
@@ -145,7 +145,7 @@ public class ProductController {
 		model.addAttribute("customersWithoutProduct", customersWithoutProduct);
 		
 		
-		return"products/showProduct.jsp";
+		return"productsFiles/showProduct.jsp";
 
 	}
 	
@@ -156,10 +156,8 @@ public class ProductController {
 	public String showEditProduct(@PathVariable("id") Long productId, Model model) {
 		Product product = apiService.getThisProduct(productId);
 		model.addAttribute("product", product);
-		
-		
-		
-		return"products/editProduct.jsp";
+
+		return"productsFiles/editProduct.jsp";
 
 	}
 	
@@ -171,8 +169,9 @@ public class ProductController {
 		
 		if (result.hasErrors()) {
 			System.out.println("all errors:  " + result.toString());
-			return"products/editProduct.jsp";
+			return"productsFiles/editProduct.jsp";
 		}
+		
 		apiService.updateProduct(product);
 		
 		return "redirect:/products/"+product.getId();  //when complete, we show all the products, again, but we could show product details on the product page
