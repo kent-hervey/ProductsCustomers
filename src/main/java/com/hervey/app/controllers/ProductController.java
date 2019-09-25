@@ -2,6 +2,7 @@ package com.hervey.app.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hervey.app.models.Customer;
 import com.hervey.app.models.Product;
@@ -151,18 +153,29 @@ public class ProductController {
 	//Renders Edit Product page
 	@GetMapping("/{id}/edit")
 	//needs:
-	public String showEditProduct() {
+	public String showEditProduct(@PathVariable("id") Long productId, Model model) {
+		Product product = apiService.getThisProduct(productId);
+		model.addAttribute("product", product);
 		
-		return"products/showProduct.jsp";
+		
+		
+		return"products/editProduct.jsp";
 
 	}
 	
 	//Does action of editing Product
 	@PutMapping("/{id}")
 	//needs:
-	public String editProduct() {
+	public String editProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
+		System.out.println("product id is:  " + product.getId());
 		
-		return "redirect:/products";  //when complete, we show all the products, again, but we could show product details on the product page
+		if (result.hasErrors()) {
+			System.out.println("all errors:  " + result.toString());
+			return"products/editProduct.jsp";
+		}
+		apiService.updateProduct(product);
+		
+		return "redirect:/products/"+product.getId();  //when complete, we show all the products, again, but we could show product details on the product page
 	}
 	
 }

@@ -15,34 +15,49 @@
 <body>
 	<div class="container">
 		<h1>New Product</h1>
-		<div class="col-50">
+		<div class="row">
+			<div class="col-50">
+			
+				<form:form action="/products" method="POST" modelAttribute="product">
+				
+				
+				<form:label path="name">Name</form:label>
+				<form:errors path="name"/>
+				<form:input path="name"/>
+				
+				<form:label path="modelNumber">Model</form:label>
+				<form:errors path="modelNumber"/>
+				<form:input path="modelNumber"/>			
+				
+				<form:label path="listPrice">List Price</form:label>
+				<form:errors path="listPrice"/>
+				<form:input path="listPrice"/>			
+				
 		
-			<form:form action="/products" method="POST" modelAttribute="product">
+				<form:label path="description">Description</form:label>
+				<form:errors path="description"/>
+				<form:input path="description"/>
+				
+				<input type="submit" value="Create"/>
+				
+				</form:form>
+			</div>
 			
+		</div><!-- end row -->
 			
-			<form:label path="name">Name</form:label>
-			<form:errors path="name"/>
-			<form:input path="name"/>
-			
-			<form:label path="modelNumber">Model</form:label>
-			<form:errors path="modelNumber"/>
-			<form:input path="modelNumber"/>			
-			
-			<form:label path="listPrice">List Price</form:label>
-			<form:errors path="listPrice"/>
-			<form:input path="listPrice"/>			
-			
-	
-			<form:label path="description">Description</form:label>
-			<form:errors path="description"/>
-			<form:input path="description"/>
-			
-			<input type="submit" value="Create"/>
-			
-			</form:form>
+		<div class="row">
+			<div class="col-25">
+				<a href="/">Home</a>
+			</div>
+			<div class="col-25">
+				<a href="/products">Products Page</a>
+			</div>
+			<div class="col-25">
+				<a href="javascript:history.back()">Previous Page</a>
+			</div>
 		</div>
-	
-	</div>
+		
+	</div><!-- end container -->
 
 </body>
 </html>

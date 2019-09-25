@@ -83,7 +83,6 @@
 			</div>
 			-->
 		</div>
-		Adding another customer to this product...only selecting from listed customers...and only customers not already added
 		
 		<form:form action="/products/${product.getId()}/customers" method="POST" modelAttribute="productCustomer">
 			<fieldset>
@@ -130,12 +129,21 @@
 				<input type="submit" value="Add">
 			</fieldset>
 		</form:form>
-		
-		
-		
 	
+		<div class="row">
+			<div class="col-25">
+				<a href="/">Home</a>
+			</div>
+			<div class="col-25">
+				<a href="/products">Products Page</a>
+			</div>
+			<div class="col-25">
+				<a href="javascript:history.back()">Previous Page</a>
+			</div>
+		</div>
 	
-	</div>
+	</div><!-- end container -->
+
 
 </body>
 </html>

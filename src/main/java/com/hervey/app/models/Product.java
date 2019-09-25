@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="products")
@@ -23,10 +25,16 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+	@NotEmpty
+	@Size(min=3, message="Must be at least 3 characters")
     private String name;
     
+	@NotEmpty
+	@Size(min=3, message="Must be at least 3 characters")
     private String description;
     
+	@NotEmpty
+	@Size(min=3, message="Must be at least 3 characters")
     private String modelNumber;
     
     private double listPrice;

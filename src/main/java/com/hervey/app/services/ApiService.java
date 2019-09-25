@@ -77,22 +77,18 @@ public class ApiService {
 		
 	}
 
-	public void deleteCustomerFromProductx(Long productId, Long customerId) {
-		Product product=productRepository.findById(productId).orElse(null);
-		Customer customer =customerRepository.findById(customerId).orElse(null);
-		System.out.println("product is:  " + product.getId() + " and customer is:  " +customer.getId());
-		product.getCustomers().remove(customer);
-		productRepository.save(product);
-		
-	}
-	
-	
+
 	public void deleteCustomerFromProduct(Long productId, Long customerId) {
 		Product product=productRepository.findById(productId).orElse(null);
 		Customer customer =customerRepository.findById(customerId).orElse(null);
 		ProductCustomer productCustomer=productCustomerRepository.findByProductAndCustomer(product, customer);
 		System.out.println("Id of product customer being deleted is:  " + productCustomer.getId());
 		productCustomerRepository.delete(productCustomer);
+	}
+
+	public void updateProduct(@Valid Product product) {
+		productRepository.save(product);
+		
 	}
 	
 	

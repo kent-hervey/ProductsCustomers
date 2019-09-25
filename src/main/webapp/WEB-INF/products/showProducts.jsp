@@ -51,13 +51,20 @@
 	</table>
 	<div>
 		<a href="/products/new"><button>Create a New Product</button></a>
-	
-	
-	
-	
+
 	</div>
 	
-	
+			<div class="row">
+			<div class="col-25">
+				<a href="/">Home</a>
+			</div>
+			<div class="col-25">
+				<a href="/products">Products Page</a>
+			</div>
+			<div class="col-25">
+				<a href="javascript:history.back()">Previous Page</a>
+			</div>
+		</div>
 	
 	</div>
 
