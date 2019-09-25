@@ -35,7 +35,7 @@ public class ApiService {
 		return productRepository.findAll();
 	}
 
-	public Vendor getVendor() {
+	public Vendor fetchVendor() {
 		return vendorRepository.findById((long) 1).orElse(null);
 
 	}
@@ -45,11 +45,11 @@ public class ApiService {
 		
 	}
 
-	public Product getThisProduct(long productId) {
+	public Product fetchThisProduct(long productId) {
 		return productRepository.findById(productId).orElse(null);
 	}
 	
-	public Customer getThisCustomer(long customerId) {
+	public Customer fetchThisCustomer(long customerId) {
 		return customerRepository.findById(customerId).orElse(null);
 	}
 	
@@ -61,13 +61,13 @@ public class ApiService {
 		
 	}
 
-	public List<ProductCustomer> getAllProductCustomers() {
+	public List<ProductCustomer> fetchAllProductCustomers() {
 		return productCustomerRepository.findAll();
 	}
 	
 	
 	//Retrieves all Customers who don't have this product
-	public List<Customer> findCustomersWithoutThisProduct(Product product){
+	public List<Customer> fetchCustomersWithoutThisProduct(Product product){
 		//System.out.println("product name is:  " + product.getName());
 		return customerRepository.findByProductsNotContains(product);
 	}

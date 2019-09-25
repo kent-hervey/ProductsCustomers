@@ -92,7 +92,7 @@
 						<label for=>Customer:</label>
 					</div>
 					<div class="col-25">
-						<select name="customerx">
+						<select name="customer">
 							<c:forEach items="${customersWithoutProduct}" var="customerNot">
 								<option value="<c:out value="${customerNot.id}"/>"><c:out value="${customerNot.name}"/></option>
 							</c:forEach>

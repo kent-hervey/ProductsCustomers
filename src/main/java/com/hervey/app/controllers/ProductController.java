@@ -22,15 +22,18 @@ import com.hervey.app.models.Customer;
 import com.hervey.app.models.Product;
 import com.hervey.app.models.ProductCustomer;
 import com.hervey.app.models.Vendor;
+import com.hervey.app.repositories.ProductRepository;
 import com.hervey.app.services.ApiService;
 
 @RequestMapping("/products")
 @Controller
 public class ProductController {
 	private final ApiService apiService;
+	private final ProductRepository productRepository;
 
-	public ProductController(ApiService apiService) {
+	public ProductController(ApiService apiService, ProductRepository productRepository) {
 		this.apiService = apiService;
+		this.productRepository=productRepository;
 	}
 
 	// display list of Products that at least includes a link to the show product
@@ -39,7 +42,7 @@ public class ProductController {
 	// needs:
 	public String showProducts(Model model) {
 
-		Vendor vendor = apiService.getVendor();
+		Vendor vendor = apiService.fetchVendor();
 		model.addAttribute("vendor", vendor);
 
 		List<Product> products = apiService.getAllProducts();
@@ -64,7 +67,7 @@ public class ProductController {
 	public String deleteProduct(@PathVariable("id") Long productId) {
 		System.out.println("ready to delete a product with id:  " + productId);
 
-		Product product = apiService.getThisProduct(productId);
+		Product product = apiService.fetchThisProduct(productId);
 		System.out.println("product name to be deleted is:  " + product.getName());
 
 		apiService.deleteThisProduct(product);
@@ -77,14 +80,14 @@ public class ProductController {
 									// work...in prod Cat it is passed in via the option/select
 	// needs
 	public String addCustomerToProduct(@Valid @ModelAttribute("productCustomer") ProductCustomer productCustomer,
-			@PathVariable("id") Long productId, @RequestParam("customerx") Long customerId) {
+			@PathVariable("id") Long productId, @RequestParam("customer") Long customerId) {
 		System.out.println("toString of productCustomer:  " + productCustomer);
 		System.out.println("product isx:  " + productId);
 		System.out.println("customer selected is:  " + customerId);
 
-		Product product = apiService.getThisProduct(productId);
+		Product product = apiService.fetchThisProduct(productId);
 
-		Customer customer = apiService.getThisCustomer(customerId);
+		Customer customer = apiService.fetchThisCustomer(customerId);
 		System.out.println("customer name is:  " + customer);
 
 		productCustomer.setCustomer(customer);
@@ -121,13 +124,13 @@ public class ProductController {
 	public String showProduct(@ModelAttribute("productCustomer") ProductCustomer productCustomer,
 			@PathVariable("id") Long productId, Model model) {
 
-		Product product = apiService.getThisProduct(productId);
+		Product product = apiService.fetchThisProduct(productId);
 		model.addAttribute("product", product);
 
-		List<ProductCustomer> productCustomers = apiService.getAllProductCustomers();
+		List<ProductCustomer> productCustomers = apiService.fetchAllProductCustomers();
 		model.addAttribute("productCustomers", productCustomers);
 
-		List<Customer> customersWithoutProduct = apiService.findCustomersWithoutThisProduct(product);
+		List<Customer> customersWithoutProduct = apiService.fetchCustomersWithoutThisProduct(product);
 		model.addAttribute("customersWithoutProduct", customersWithoutProduct);
 
 		return "productsFiles/showProduct.jsp";
@@ -138,7 +141,7 @@ public class ProductController {
 	@GetMapping("/{id}/edit")
 	// needs:
 	public String showEditProduct(@PathVariable("id") Long productId, Model model) {
-		Product product = apiService.getThisProduct(productId);
+		Product product = apiService.fetchThisProduct(productId);
 		model.addAttribute("product", product);
 
 		return "productsFiles/editProduct.jsp";
@@ -150,17 +153,17 @@ public class ProductController {
 	// needs:
 	public String editProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
 		System.out.println("product id is:  " + product.getId());
+		String modelNum=product.getModelNumber();
 
 		if (result.hasErrors()) {
-			System.out.println("all errors:  " + result.toString());
+			//System.out.println("all errors:  " + result.toString());
 			//return"redirect:/products/"+product.getId()+"/edit";
-			//return "productsFiles/editProduct.jsp";
-			  return "productsFiles/editProduct.jsp";
+			System.out.println("next");
+			product.setModelNumber(modelNum);
+			
+			return "productsFiles/editProduct.jsp";
 		}
 
-		apiService.updateProduct(product);
-
-		
 		return"redirect:/products";
 		//return "redirect:/products/" + product.getId(); // when complete, we show all the products, again, but we could
 														// show product details on the product page
