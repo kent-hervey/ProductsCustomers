@@ -101,12 +101,7 @@ public class ProductController {
 		return"redirect:/products/"+productId;
 	}
 	
-	
-	
-	
-	
-	
-	
+
 	
 	//display page for creating new product
 	@GetMapping("/new")
@@ -169,7 +164,9 @@ public class ProductController {
 		
 		if (result.hasErrors()) {
 			System.out.println("all errors:  " + result.toString());
-			return"productsFiles/editProduct.jsp";
+			
+			return"redirect:/products/"+product.getId()+"/edit";
+			//return"productsFiles/editProduct.jsp";
 		}
 		
 		apiService.updateProduct(product);
