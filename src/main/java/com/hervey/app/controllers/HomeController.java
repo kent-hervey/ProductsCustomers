@@ -8,16 +8,15 @@ import com.hervey.app.services.ApiService;
 @Controller
 public class HomeController {
 	private final ApiService apiService;
-	
+
 	public HomeController(ApiService apiService) {
-		this.apiService=apiService;
+		this.apiService = apiService;
 	}
-	
+
 	@GetMapping("")
 	public String showHome() {
-		
+
 		return "home.jsp";
 	}
-	
 
 }

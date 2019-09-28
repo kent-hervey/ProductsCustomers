@@ -11,20 +11,18 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="vendors")
+@Table(name = "vendors")
 public class Vendor {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    
-    private String companyName;	
-    
-    private String companyLocation;
-    
-    private String companyEmail;
-    
-    
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	private String companyName;
+
+	private String companyLocation;
+
+	private String companyEmail;
+
 	private Date createdAt;
 
 	private Date updatedAt;
@@ -38,9 +36,9 @@ public class Vendor {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
-	
+
 	public Vendor() {
-		
+
 	}
 
 	public Long getId() {
@@ -151,18 +149,5 @@ public class Vendor {
 		return "Vendor [id=" + id + ", companyName=" + companyName + ", companyLocation=" + companyLocation
 				+ ", companyEmail=" + companyEmail + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

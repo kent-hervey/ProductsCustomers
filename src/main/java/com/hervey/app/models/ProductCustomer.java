@@ -17,22 +17,22 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="products_customers")
+@Table(name = "products_customers")
 public class ProductCustomer {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String serialNumber;
-	
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date purchaseDate;
-	
-    @Column(updatable=false)
-    private Date createdAt;
-    
-    private Date updatedAt;
-    
+
+	@Column(updatable = false)
+	private Date createdAt;
+
+	private Date updatedAt;
+
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = new Date();
@@ -42,17 +42,17 @@ public class ProductCustomer {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
-	
+
 	public ProductCustomer() {
-		
+
 	}
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="product_id")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_id")
 	private Product product;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="customer_id")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
 	public Long getId() {
@@ -175,23 +175,7 @@ public class ProductCustomer {
 	@Override
 	public String toString() {
 		return "ProductCustomer [id=" + id + ", serialNumber=" + serialNumber + ", purchaseDate=" + purchaseDate
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", product=" + product + ", customer="
-				+ customer + "]";
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

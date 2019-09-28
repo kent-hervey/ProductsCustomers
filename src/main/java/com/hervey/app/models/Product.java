@@ -19,31 +19,31 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="products")
+@Table(name = "products")
 public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@NotEmpty
-	@Size(min=3, message="Must be at least 3 characters")
-    private String name;
-    
+	@Size(min = 3, message = "Must be at least 3 characters")
+	private String name;
+
 	@NotEmpty
-	@Size(min=3, message="Must be at least 3 characters")
-    private String description;
-    
+	@Size(min = 3, message = "Must be at least 3 characters")
+	private String description;
+
 	@NotEmpty
-	@Size(min=3, message="Must be at least 3 characters")
-    private String modelNumber;
-    
-    private double listPrice;
-    
-    @Column(updatable=false)
-    private Date createdAt;
-    
-    private Date updatedAt;
-    
+	@Size(min = 3, message = "Must be at least 3 characters")
+	private String modelNumber;
+
+	private double listPrice;
+
+	@Column(updatable = false)
+	private Date createdAt;
+
+	private Date updatedAt;
+
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = new Date();
@@ -53,14 +53,14 @@ public class Product {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
-    
+
 	public Product() {
-		
+
 	}
-	
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "products_customers", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "customer_id"))
-    private List<Customer> customers;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "products_customers", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "customer_id"))
+	private List<Customer> customers;
 
 	public Long getId() {
 		return id;
@@ -195,14 +195,7 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", modelNumber=" + modelNumber
-				+ ", listPrice=" + listPrice + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", customers="
-				+ customers + "]";
+				+ ", listPrice=" + listPrice + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
-    
-	
-    
-    
-    
-    
-    
+
 }

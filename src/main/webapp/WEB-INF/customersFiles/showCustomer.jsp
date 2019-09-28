@@ -14,36 +14,36 @@
 
 <body>
 	<div class="container">
-		<h1>Details of product:   </h1>
+		<h1>Details of Customer:   </h1>
 		<div class="col-5">
 		
 		</div>
 		<div class="col-50">
 			<ul>
-			  <li>Name:  ${product.getName()}</li>
-			  <li>Model:  ${product.getModelNumber()}</li>
-			  <li>List Price:  ${product.getListPrice()}</li>
-			  <li>Description:  ${product.getDescription()}</li>
-			  <li>ID:  ${product.getId()}</li>
-			  <li>Number of Customers:  ${product.getCustomers().size()}</li>
+			  <li>Name:  ${customer.getName()}</li>
+			  <li>Contact Name:  ${customer.getContactName()}</li>
+			  <li>Contact Email: ${customer.getContactEmail()}</li>
+			  <li>Location:  ${customer.getLocation()}</li>
+			  <li>ID:  ${customer.getId()}</li>
+			  <li>Number of Products:  ${customer.getProducts().size()}</li>
 			</ul>
 		</div>
 		
 		<table class="tablestyle">
 			<thead>
 				<tr>
-					<td>Customer Name</td>
-					<td>Customer Location</td>
+					<td>Product Name</td>
+					<td>Product Model</td>
 					<td>Serial Number</td>
 					<td>Purchase Date</td>
 					<td>Action</td>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${product.getCustomers()}" var="customer">
+				<c:forEach items="${customer.getProducts()}" var="product">
 					<tr>
-						<td><a href="/customers/${customer.getId()}">${customer.getName()} ${customer.getId()}</a></td>
-						<td>${customer.getLocation()}</td>
+						<td><a href="/products/${product.getId()}">${product.getName()} ${product.getId()}</a></td>
+						<td>${product.getModelNumber()}</td>
 						<c:forEach items="${productCustomers}" var="productOwners">
 							<c:choose>
 							<c:when test="${productOwners.getProduct().getId()==product.getId() && productOwners.getCustomer().getId()==customer.getId()}">
@@ -52,7 +52,7 @@
 									<fmt:formatDate type="date" value="${productOwners.getPurchaseDate()}"/>
 								</td>
 								<td>
-									<form:form action="/products/${product.getId()}/customers/${customer.getId()}" method="POST">
+									<form:form action="/customers/${customer.getId()}/products/${product.getId()}" method="POST">
 										<input type="hidden" name="_method" value="delete">
 										<input class="normal-link" type="submit" value="Delete">
 									</form:form>
@@ -67,11 +67,11 @@
 		
 		<div class="row">
 			<div class="col-25">
-				<a href="/products/${product.getId()}/edit"><button>Edit Product</button></a>
+				<a href="/customers/${customer.getId()}/edit"><button>Edit Customer</button></a>
 			</div>
 			<!--  
 			<div class="col-25">
-				<form:form action="/products/${product.getId()}" method="POST">
+				<form:form action="/customers/${customer.getId()}" method="POST">
 					<input type="hidden" name="_method" value="delete">
 					<input type="submit" value="Delete Product">
 				</form:form>
@@ -79,17 +79,17 @@
 			-->
 		</div>
 		
-		<form:form action="/products/${product.getId()}/customers" method="POST" modelAttribute="productCustomer">
+		<form:form action="/customers/${customer.getId()}/products" method="POST" modelAttribute="productCustomer">
 			<fieldset>
-				<legend>Add another Customer to this Product</legend>
+				<legend>Add another Product to this Customer</legend>
 				<div class="row">
 					<div class="col-50">
-						<label for=>Customer:</label>
+						<label for=>Product:</label>
 					</div>
 					<div class="col-25">
-						<select name="customer">
-							<c:forEach items="${customersWithoutProduct}" var="customerNot">
-								<option value="<c:out value="${customerNot.id}"/>"><c:out value="${customerNot.name}"/></option>
+						<select name="product">
+							<c:forEach items="${productsWithoutCustomer}" var="productNot">
+								<option value="<c:out value="${productNot.id}"/>"><c:out value="${productNot.name}"/></option>
 							</c:forEach>
 						</select>
 					</div>
@@ -121,7 +121,7 @@
 				<a href="/">Home</a>
 			</div>
 			<div class="col-25">
-				<a href="/products">Products Page</a>
+				<a href="/customers">Customers Page</a>
 			</div>
 			<div class="col-25">
 				<a href="javascript:history.back()">Previous Page</a>

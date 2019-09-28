@@ -21,16 +21,17 @@ public class ApiService {
 	private final ProductRepository productRepository;
 	private final ProductCustomerRepository productCustomerRepository;
 	private final VendorRepository vendorRepository;
-	
-	public ApiService(CustomerRepository customerRepository, ProductRepository productRepository, ProductCustomerRepository productCustomerRepository, VendorRepository vendorRepository) {
-		this.customerRepository=customerRepository;
-		this.productRepository=productRepository;
-		this.productCustomerRepository=productCustomerRepository;
-		this.vendorRepository=vendorRepository;
+
+	public ApiService(CustomerRepository customerRepository, ProductRepository productRepository,
+			ProductCustomerRepository productCustomerRepository, VendorRepository vendorRepository) {
+		this.customerRepository = customerRepository;
+		this.productRepository = productRepository;
+		this.productCustomerRepository = productCustomerRepository;
+		this.vendorRepository = vendorRepository;
 	}
 
-	public List<Product> getAllProducts() {
-		
+	public List<Product> fetchAllProducts() {
+
 		// TODO Auto-generated method stub
 		return productRepository.findAll();
 	}
@@ -42,55 +43,78 @@ public class ApiService {
 
 	public void saveProduct(Product product) {
 		productRepository.save(product);
-		
+
 	}
 
-	public Product fetchThisProduct(long productId) {
+	public void saveCustomer(@Valid Customer customer) {
+		customerRepository.save(customer);
+
+	}
+
+	public Product fetchThisProduct(Long productId) {
 		return productRepository.findById(productId).orElse(null);
 	}
-	
-	public Customer fetchThisCustomer(long customerId) {
+
+	public Customer fetchThisCustomer(Long customerId) {
 		return customerRepository.findById(customerId).orElse(null);
 	}
-	
-	
 
 	public void deleteThisProduct(Product product) {
-		System.out.println("about to delete product with name:  " + product.getName());
 		productRepository.delete(product);
-		
+
+	}
+
+	public void deleteThisCustomer(Customer customer) {
+		customerRepository.delete(customer);
+
 	}
 
 	public List<ProductCustomer> fetchAllProductCustomers() {
 		return productCustomerRepository.findAll();
 	}
-	
-	
-	//Retrieves all Customers who don't have this product
-	public List<Customer> fetchCustomersWithoutThisProduct(Product product){
-		//System.out.println("product name is:  " + product.getName());
+
+	// Retrieves all Customers who don't have this product
+	public List<Customer> fetchCustomersWithoutThisProduct(Product product) {
 		return customerRepository.findByProductsNotContains(product);
+	}
+
+	// Retrieves all Products who don't have this customer
+	public List<Product> fetchProductsWithoutThisCustomer(Customer customer) {
+		return productRepository.findByCustomersNotContains(customer);
 	}
 
 	public void saveProductCustomer(@Valid ProductCustomer productCustomer) {
 		productCustomerRepository.save(productCustomer);
-		
 	}
 
-
+	// deletes row from middle table, same as deleteProductFromCustomer
 	public void deleteCustomerFromProduct(Long productId, Long customerId) {
-		Product product=productRepository.findById(productId).orElse(null);
-		Customer customer =customerRepository.findById(customerId).orElse(null);
-		ProductCustomer productCustomer=productCustomerRepository.findByProductAndCustomer(product, customer);
-		System.out.println("Id of product customer being deleted is:  " + productCustomer.getId());
+		this.disassociateProductAndCustomer(customerId, productId);
+	}
+
+	// deletes row from middle table, same as deleteCustomerFromProduct
+	public void deleteProductFromCustomer(Long customerId, Long productId) {
+		this.disassociateProductAndCustomer(customerId, productId);
+	}
+
+	private void disassociateProductAndCustomer(Long customerId, Long productId) {
+		Product product = productRepository.findById(productId).orElse(null);
+		Customer customer = customerRepository.findById(customerId).orElse(null);
+		ProductCustomer productCustomer = productCustomerRepository.findByProductAndCustomer(product, customer);
 		productCustomerRepository.delete(productCustomer);
 	}
 
 	public void updateProduct(@Valid Product product) {
 		productRepository.save(product);
-		
 	}
-	
-	
+
+	public void updateCustomer(@Valid Customer customer) {
+		customerRepository.save(customer);
+
+	}
+
+	public List<Customer> fetchAllCustomers() {
+		return customerRepository.findAll();
+	}
 
 }

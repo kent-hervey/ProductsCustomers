@@ -44,3 +44,15 @@ Bullet list:
 
 
 
+
+# Potential Future Features:
+Bullet list:
+  * API interface
+  * Search, sort, or pagination to accommodate long lists
+
+
+
+
+
+
+

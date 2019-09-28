@@ -9,37 +9,37 @@
 <head>
 	<link rel="stylesheet" href="/css/styles.css"/>
 <meta charset="ISO-8859-1">
-<title>Products</title>
+<title>Customers</title>
 
 </head>
 
 <body>
 	<div class="container">
-	<h1>Products for:  ${vendor.companyName }</h1>
+	<h1>Customers for:  ${vendor.companyName }</h1>
 	<h2>${vendor.companyLocation}</h2>
 	<p> </p>
 	
-	<h3>Total Products:  ${products.size()}</h3>
+	<h3>Total Customers:  ${customers.size()}</h3>
 
 	<table class="tablestyle">
 		<thead>
 			<tr>
 				<td>#</td>
-				<td>Product ID, Name</td>
-				<td>Model Number</td>
-				<td># Customers</td>
+				<td>Customer ID, Name</td>
+				<td>Contact Name</td>
+				<td># Products</td>
 				<td>Action</td>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${products}" var="product" varStatus="loop">
+			<c:forEach items="${customers}" var="customer" varStatus="loop">
 				<tr>
 					<td>${loop.count}</td>
-					<td>${product.getId()}, <a href="/products/${product.getId()}">${product.getName()}</a>
-					<td>${product.getModelNumber()}</td>
-					<td>${product.getCustomers().size()}</td>
+					<td>${customer.getId()}, <a href="/customers/${customer.getId()}">${customer.getName()}</a>
+					<td>${customer.getContactName()}</td>
+					<td>${customer.getProducts().size()}</td>
 					<td>
-						<form:form action="/products/${product.getId()}" method="POST">
+						<form:form action="/customers/${customer.getId()}" method="POST">
 							<input type="hidden" name="_method" value="delete">
 							<input class="normal-link" type="submit" value="Delete">
 						</form:form>
@@ -49,7 +49,7 @@
 		</tbody>
 	</table>
 	<div>
-		<a href="/products/new"><button>Create a New Product</button></a>
+		<a href="/customers/new"><button>Create a New Customer</button></a>
 
 	</div>
 	
@@ -58,7 +58,7 @@
 				<a href="/">Home</a>
 			</div>
 			<div class="col-25">
-				<a href="/products">Products Page</a>
+				<a href="customers">Customers Page</a>
 			</div>
 			<div class="col-25">
 				<a href="javascript:history.back()">Previous Page</a>
