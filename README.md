@@ -5,11 +5,11 @@ Products and Customers is a simple web application that manages the products a v
 # Installation
 This is a Maven/Spring Boot project with default WAR settings
 
-Spring Boot will populate your MySQL file.  Just create the file and if different than the default, productcustomer, change in the application.properties file
+Spring Boot will populate your MySQL file.  Just create the file and if different, change in the application.properties file
 
-Final version will include a WAR export that can be run by java -jar filename.war
 
-mvn spring-boot:run
+[comment]: # (mvn spring-boot:run)
+
 
 # Usage
 
@@ -52,6 +52,7 @@ Bullet list:
 
 # Potential Future Features:
 Bullet list:
+  * Added form input flexibility
   * API interface
   * Search, sort, or pagination to accommodate long lists
 
