@@ -15,7 +15,7 @@
 
 <body>
 	<div class="container">
-	<h1>Customers for:  ${vendor.companyName }</h1>
+	<h1>Customers of ${vendor.companyName }</h1>
 	<h2>${vendor.companyLocation}</h2>
 	<p> </p>
 	

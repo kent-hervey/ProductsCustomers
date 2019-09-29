@@ -15,8 +15,8 @@
 
 <body>
 	<div class="container">
-	<h1>Products for:  ${vendor.companyName }</h1>
-	<h2>${vendor.companyLocation}</h2>
+	<h1>Products by ${vendor.companyName }</h1>
+	<h2>Located in:  ${vendor.companyLocation}</h2>
 	<p> </p>
 	
 	<h3>Total Products:  ${products.size()}</h3>

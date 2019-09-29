@@ -37,10 +37,15 @@ Bullet list:
 
 
 
-# Screenshots:
+# Selected Screenshots:
 
+![Image](readmeimages/home.png "Home Page")  
+![Image](readmeimages/customers.png "Customers Overview")  
+![Image](readmeimages/products.png "Products Overview")  
+![Image](readmeimages/customer.png "Detail One Customer")  
+![Image](readmeimages/product.png "Detail One Product")  
+![Image](readmeimages/newproduct.png "Create New Product")  
 
-![Image](readmeimages/ProductDetails.png "Product Details")
 
 
 
