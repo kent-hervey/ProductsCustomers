@@ -148,7 +148,7 @@ public class ProductController {
 		
 		apiService.updateProduct(product);
 
-		return "redirect:/products/" + productId;
+		return "redirect:/products/" + product.getId();
 
 	}
 
