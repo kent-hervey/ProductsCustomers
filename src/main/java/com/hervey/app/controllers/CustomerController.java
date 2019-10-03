@@ -27,6 +27,8 @@ import com.hervey.app.services.ApiService;
 public class CustomerController {
 	private final ApiService apiService;
 
+	// this is the AllowCurrencyFormattingListPrice branch
+
 	public CustomerController(ApiService apiService) {
 		this.apiService = apiService;
 	}
