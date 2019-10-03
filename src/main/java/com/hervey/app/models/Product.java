@@ -16,6 +16,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -37,7 +38,9 @@ public class Product {
 	@Size(min = 3, message = "Must be at least 3 characters")
 	private String modelNumber;
 
-	private double listPrice;
+	@NotEmpty(message = "List price is required")
+	@Pattern(regexp="^\\$?-?0*(?:\\d+(?!,)(?:\\.\\d{1,2})?|(?:\\d{1,3}(?:,\\d{3})*(?:\\.\\d{1,2})?))$", message="Enter only standard USD format")
+	private String listPrice;
 
 	@Column(updatable = false)
 	private Date createdAt;
@@ -94,11 +97,11 @@ public class Product {
 		this.modelNumber = modelNumber;
 	}
 
-	public double getListPrice() {
+	public String getListPrice() {
 		return listPrice;
 	}
 
-	public void setListPrice(double listPrice) {
+	public void setListPrice(String listPrice) {
 		this.listPrice = listPrice;
 	}
 
@@ -126,6 +129,11 @@ public class Product {
 		this.customers = customers;
 	}
 
+
+	
+	
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -134,9 +142,7 @@ public class Product {
 		result = prime * result + ((customers == null) ? 0 : customers.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(listPrice);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((listPrice == null) ? 0 : listPrice.hashCode());
 		result = prime * result + ((modelNumber == null) ? 0 : modelNumber.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
@@ -172,7 +178,10 @@ public class Product {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (Double.doubleToLongBits(listPrice) != Double.doubleToLongBits(other.listPrice))
+		if (listPrice == null) {
+			if (other.listPrice != null)
+				return false;
+		} else if (!listPrice.equals(other.listPrice))
 			return false;
 		if (modelNumber == null) {
 			if (other.modelNumber != null)
