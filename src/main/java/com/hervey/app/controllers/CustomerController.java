@@ -133,7 +133,9 @@ public class CustomerController {
 		}
 
 		apiService.updateCustomer(customer);
-
+		//remove below
+		System.out.println(customer.getId());
+		
 		//return "redirect:/customer";
 		return "redirect:/customers/" + customer.getId();
 	}
