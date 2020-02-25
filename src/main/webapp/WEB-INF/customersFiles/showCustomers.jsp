@@ -58,7 +58,7 @@
 				<a href="/">Home</a>
 			</div>
 			<div class="col-25">
-				<a href="customers">Customers Page</a>
+				<a href="products">Products Page</a>
 			</div>
 			<div class="col-25">
 				<a href="javascript:history.back()">Previous Page</a>
