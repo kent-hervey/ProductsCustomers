@@ -62,7 +62,7 @@ public class Product {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "products_customers", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "customer_id"))
-	@JsonIgnore
+	//@JsonIgnore
 	private List<Customer> customers;
 
 	public Long getId() {

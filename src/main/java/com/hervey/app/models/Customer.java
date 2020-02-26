@@ -66,7 +66,7 @@ public class Customer {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "products_customers", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
-	@JsonIgnore //worked to one level
+	//@JsonIgnore //worked to one level
 	private List<Product> products;
 
 
