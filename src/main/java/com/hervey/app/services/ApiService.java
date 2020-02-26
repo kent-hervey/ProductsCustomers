@@ -83,6 +83,12 @@ public class ApiService {
 		return productRepository.findByCustomersNotContains(customer);
 	}
 
+	// Retrieves all Products which do have this customer...added 2/25/20 for API
+	public List<Product> fetchProductsWithThisCustomer(Customer customer) {
+		return productRepository.findByCustomersContains(customer);
+	}
+	
+	
 	public void saveProductCustomer(@Valid ProductCustomer productCustomer) {
 		productCustomerRepository.save(productCustomer);
 	}
