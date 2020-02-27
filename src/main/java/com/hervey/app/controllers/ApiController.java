@@ -15,10 +15,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hervey.app.dto.ListCustomersForProducts;
+import com.hervey.app.dto.ListProductsForCustomer;
 import com.hervey.app.models.Customer;
 import com.hervey.app.models.Product;
 import com.hervey.app.models.ProductCustomer;
 import com.hervey.app.services.ApiService;
+
+import javassist.NotFoundException;
+
+
 
 @RequestMapping("/api")
 @RestController
@@ -39,6 +45,9 @@ public class ApiController {
 		return allCustomers;
 	}
 	
+	
+	
+	
 	//Get number of customers
 	@GetMapping("/customers-number-of")
 	public int showNumberCustomers(){
@@ -47,7 +56,7 @@ public class ApiController {
 	}
 	
 	
-	//show one customer's id
+	//show one customer by id
 	@GetMapping("/customers-id/{id}")
 	public Long showCustomerID(@PathVariable("id") Long customerId) {
 		Customer customer = apiService.fetchThisCustomer(customerId);
@@ -55,7 +64,7 @@ public class ApiController {
 	
 	}
 	
-	//Get one customer
+	//Get one customer...needs resolution as it may or may not show products this customer has
 	@GetMapping("/customers/{id}")
 	public Customer showCustomer(@PathVariable("id") Long customerId) {
 		Customer customer = apiService.fetchThisCustomer(customerId);
@@ -82,15 +91,23 @@ public class ApiController {
 	}
 	
 	
-	//Get products for specified customer
+	//Get products for specified customer with customer shown
 	@GetMapping("/customers/{customerId}/products")
-	public List<Product> showProductsForCustomer(@ModelAttribute("productCustomer") ProductCustomer productCustomer, @PathVariable("customerId") Long customerId, Model model) {
+	public ListProductsForCustomer showProductsForCustomer(@ModelAttribute("productCustomer") ProductCustomer productCustomer, @PathVariable("customerId") Long customerId, Model model) {
 		Customer customer = apiService.fetchThisCustomer(customerId);
-		model.addAttribute("customer", customer);
-		List<Product> productsWithCustomer = apiService.fetchProductsWithThisCustomer(customer);
+		if(customer ==  null) {
+			return new ListProductsForCustomer();
+		}
+
+		//List<Product> productsWithCustomer = apiService.fetchProductsWithThisCustomer(customer);
 		//model.addAttribute("productsWithCustomer", productsWithCustomer);
-		return productsWithCustomer;
+		//return productsWithCustomer;
+		
+		
+		return new ListProductsForCustomer(customer.getId(), customer.getContactEmail(), customer.getContactName(), customer.getLocation(), customer.getName(), customer.getProducts());
 	}
+	
+	
 	
 
 	//Add product to specified customer
@@ -118,16 +135,38 @@ public class ApiController {
 	//End Customers, begin Products
 	
 	
-	//Get all the products
+	//Get all the products only
 	@GetMapping("/products")
 	public List<Product> showAllProducts(){
 		List<Product> allProducts = apiService.fetchAllProducts();
 		return allProducts;
 	}
 	
+	//Get all the products with their customers
+	@GetMapping("/products-customers")
+	public List<Product> showAllProductsWithCustomers(){
+		List<Product> allProducts = apiService.fetchAllProducts();
+		return allProducts;
+		
+	}
 	
-	
-	
+	////This needs work to adapt the product version from the customers version already working
+	//Get customers for specified product with product shown
+	@GetMapping("/products/{productId}/customers")
+	public ListCustomersForProducts showCustomersForProduct(@ModelAttribute("productCustomer") ProductCustomer productCustomer, @PathVariable("productId") Long productId, Model model, BindingResult result) {
+
+		Product product = apiService.fetchThisProduct(productId);
+		if(product ==  null) {
+			return new ListCustomersForProducts();
+		}
+
+		//List<Product> productsWithCustomer = apiService.fetchProductsWithThisCustomer(customer);
+		//model.addAttribute("productsWithCustomer", productsWithCustomer);
+		//return productsWithCustomer;
+		
+		
+		return new ListCustomersForProducts(product.getId(), product.getName(), product.getModelNumber(), product.getDescription(), product.getCustomers());
+	}
 
 
 }
