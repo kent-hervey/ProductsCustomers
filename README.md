@@ -44,19 +44,25 @@ Note:  this means that adding or deleting a product to/from a customer also mean
 GET:
 
 api/customers:  Shows all customers without products
+
 api/customers-number-of:  Shows number of customers
+
 api/customers-ids:  Shows list of valid customer ids as an arrayList of Integers
+
 api/customers/{customerId}:  Shows customer with specified customer ID and maybe their products
+
 api/customers/{customerId}/products:  Shows customer with specified customer ID and all their products.  If customer does exist, then returns null for customer fields
 
 POST:
 
 api/customers:  adds a single customer. Required fields: String name; String location; String contactName; String contactEmail
+
 api/customers/{customerId}/products/{productId}:  Adds product {productId} to customer {customerId}.  Required fields:  non.  Expected fields:  Date purchaseDate pattern = "yyyy-MM-dd", String serialNumber 
 
 DELETE:
 
 api/customers/{customerId}/products/{productId}: Deletes specified product from specified customer
+
 api/customers/{customerId}:  Deletes specified customer
 
 PUT:
@@ -68,16 +74,19 @@ api/customers/{customerId}:  Modifies fields of existing customer.  Required fie
 GET:
 
 api/products:  Shows all products without customers
+
 api/products/{productId}/customers:  Shows product with specified product ID and all their customers.  If product does not exist, then returns null for product fields
 
 POST:
 
 api/products:  adds a single product.  Required fields:  String name; String description; Double listPrice; String modelNumber
+
 api/products/{productsId}/customers/{customerId}:  Adds customer {customerId} to product {productId}.  Required fields:  none.  Expected fields:  Date purchaseDate pattern = "yyyy-MM-dd", String serialNumber
 
 DELETE:
 
 api/products/{productId}/customers/{customersId}: Deletes specified customer from specified product
+
 api/products/{productId}:  Deletes the specified product
 
 
