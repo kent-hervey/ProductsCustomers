@@ -43,7 +43,7 @@ Note:  this means that adding or deleting a product to/from a customer also mean
 
 GET:
 
-api/customers:  Shows all customers without products
+api/customers:  Shows all customers
 
 api/customers-number-of:  Shows number of customers
 
@@ -73,7 +73,7 @@ api/customers/{customerId}:  Modifies fields of existing customer.  Required fie
 
 GET:
 
-api/products:  Shows all products without customers
+api/products:  Shows all products
 
 api/products/{productId}/customers:  Shows product with specified product ID and all their customers.  If product does not exist, then returns null for product fields
 
