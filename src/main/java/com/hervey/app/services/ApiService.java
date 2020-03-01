@@ -1,5 +1,6 @@
 package com.hervey.app.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -34,6 +35,15 @@ public class ApiService {
 
 		// TODO Auto-generated method stub
 		return productRepository.findAll();
+	}
+	
+	
+	public List<Integer> fetchAllCustomerIDs(){
+		List<Integer> idList = new ArrayList<Integer>();
+		for(Customer customer : customerRepository.findAll()) {
+			idList.add(customer.getId().intValue());
+		}
+		return idList;
 	}
 
 	public Vendor fetchVendor() {

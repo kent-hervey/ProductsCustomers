@@ -22,8 +22,6 @@ import com.hervey.app.models.Product;
 import com.hervey.app.models.ProductCustomer;
 import com.hervey.app.services.ApiService;
 
-import javassist.NotFoundException;
-
 
 
 @RequestMapping("/api")
@@ -45,9 +43,6 @@ public class ApiController {
 		return allCustomers;
 	}
 	
-	
-	
-	
 	//Get number of customers
 	@GetMapping("/customers-number-of")
 	public int showNumberCustomers(){
@@ -55,8 +50,15 @@ public class ApiController {
 		return allCustomers.size();
 	}
 	
+	//Get list of valid IDs for customers
+	@GetMapping("/customers-ids")
+	public List<Integer> showCustomerIds(){
+		System.out.println(apiService.fetchAllCustomerIDs());
+		return apiService.fetchAllCustomerIDs();
+	}
 	
-	//show one customer by id
+	
+	//show one customer's id
 	@GetMapping("/customers-id/{id}")
 	public Long showCustomerID(@PathVariable("id") Long customerId) {
 		Customer customer = apiService.fetchThisCustomer(customerId);
@@ -64,12 +66,12 @@ public class ApiController {
 	
 	}
 	
-	//Get one customer...needs resolution as it may or may not show products this customer has
+	
+	//Get one customer...
 	@GetMapping("/customers/{id}")
 	public Customer showCustomer(@PathVariable("id") Long customerId) {
 		Customer customer = apiService.fetchThisCustomer(customerId);
 		return customer;
-	
 	}
 	
 	//Add a customer
@@ -85,7 +87,6 @@ public class ApiController {
 		if(result.hasErrors()) {
 			return null;
 		}
-		
 		apiService.updateCustomer(customer);
 		return customer;
 	}
@@ -108,8 +109,6 @@ public class ApiController {
 	}
 	
 	
-	
-
 	//Add product to specified customer
 	@PostMapping("/customers/{customerId}/products/{productId}")
 	public ProductCustomer addProductToCustomer(@Valid @ModelAttribute("productCustomer") ProductCustomer productCustomer, @PathVariable("customerId") Long customerId, @PathVariable("productId") Long productId) {
@@ -117,15 +116,25 @@ public class ApiController {
 		Customer customer = apiService.fetchThisCustomer(customerId);
 		productCustomer.setCustomer(customer);
 		productCustomer.setProduct(product);
+
 		apiService.saveProductCustomer(productCustomer);
 		return productCustomer;
 	}
-	
+	 
 	//Deletes product from specified customer
 	@DeleteMapping("/customers/{customerId}/products/{productId}")
 	public String deleteProductFromCustomer(@PathVariable("customerId") Long customerId, @PathVariable("productId") Long productId) {
-		 apiService.deleteProductFromCustomer(customerId, productId);
+		apiService.deleteProductFromCustomer(customerId, productId);
 		return "deleted";
+	}
+	
+	//Delete customer with this customerId
+	@DeleteMapping("/customers/{customerId}")
+	public String deleteCustomer(@PathVariable("customerId") Long customerId) {
+		Customer customer = apiService.fetchThisCustomer(customerId);
+		apiService.deleteThisCustomer(customer);
+		
+		return "customer deleted";
 	}
 	
 	
@@ -141,16 +150,9 @@ public class ApiController {
 		List<Product> allProducts = apiService.fetchAllProducts();
 		return allProducts;
 	}
+
 	
-	//Get all the products with their customers
-	@GetMapping("/products-customers")
-	public List<Product> showAllProductsWithCustomers(){
-		List<Product> allProducts = apiService.fetchAllProducts();
-		return allProducts;
-		
-	}
-	
-	////This needs work to adapt the product version from the customers version already working
+
 	//Get customers for specified product with product shown
 	@GetMapping("/products/{productId}/customers")
 	public ListCustomersForProducts showCustomersForProduct(@ModelAttribute("productCustomer") ProductCustomer productCustomer, @PathVariable("productId") Long productId, Model model, BindingResult result) {
@@ -168,5 +170,49 @@ public class ApiController {
 		return new ListCustomersForProducts(product.getId(), product.getName(), product.getModelNumber(), product.getDescription(), product.getCustomers());
 	}
 
-
+	//Add a product
+	@PostMapping("/products")
+	public Product createProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
+		apiService.saveProduct(product);
+		return product;
+	}
+	
+	//Add customer to specified product
+	@PostMapping("/products/{productId}/customers/{customerId}")
+	public ProductCustomer addCustomerToProduct(@Valid @ModelAttribute("productCustomer") ProductCustomer productCustomer, @PathVariable("productId") Long productId, @PathVariable("customerId") Long customerId) {
+		Customer customer = apiService.fetchThisCustomer(customerId);
+		Product product = apiService.fetchThisProduct(productId);
+		productCustomer.setProduct(product);
+		productCustomer.setCustomer(customer);
+		apiService.saveProductCustomer(productCustomer);
+		return productCustomer;
+		
+		
+	}
+	
+	 //Deletes customer from specified product
+	@DeleteMapping("/products/{productId}/customers/{customerId}")
+	public String deleteCustomerFromProduct(@PathVariable("productId") Long productId, @PathVariable("customerId") Long customerId) {
+		apiService.deleteCustomerFromProduct(productId, customerId);
+		return "deleted";
+	}
+	
+	//Delete product with this ID
+	@DeleteMapping("/products/{productId}")
+	public String deleteProduct(@PathVariable("productId") Long productId) {
+		Product product = apiService.fetchThisProduct(productId);
+		apiService.deleteThisProduct(product);
+		return "product deleted";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

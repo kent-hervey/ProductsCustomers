@@ -19,7 +19,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "customers")
@@ -66,8 +66,8 @@ public class Customer {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "products_customers", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
-	//@JsonIgnore //worked to one level
-	@JsonManagedReference
+	@JsonIgnore //worked to one level
+	//@JsonManagedReference
 	private List<Product> products;
 
 
