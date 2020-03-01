@@ -1,5 +1,6 @@
 package com.hervey.app.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -34,6 +35,15 @@ public class ApiService {
 
 		// TODO Auto-generated method stub
 		return productRepository.findAll();
+	}
+	
+	
+	public List<Integer> fetchAllCustomerIDs(){
+		List<Integer> idList = new ArrayList<Integer>();
+		for(Customer customer : customerRepository.findAll()) {
+			idList.add(customer.getId().intValue());
+		}
+		return idList;
 	}
 
 	public Vendor fetchVendor() {
@@ -83,6 +93,12 @@ public class ApiService {
 		return productRepository.findByCustomersNotContains(customer);
 	}
 
+	// Retrieves all Products which do have this customer...added 2/25/20 for API
+	public List<Product> fetchProductsWithThisCustomer(Customer customer) {
+		return productRepository.findByCustomersContains(customer);
+	}
+	
+	
 	public void saveProductCustomer(@Valid ProductCustomer productCustomer) {
 		productCustomerRepository.save(productCustomer);
 	}
@@ -117,4 +133,7 @@ public class ApiService {
 		return customerRepository.findAll();
 	}
 
+
+	
+	
 }
