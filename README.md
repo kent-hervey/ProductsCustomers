@@ -107,7 +107,6 @@ api/products/{productId}:  Deletes the specified product
 # Potential Future Features:
 
   * Added form input flexibility
-  * API interface
   * Search, sort, or pagination to accommodate long lists
 
 
