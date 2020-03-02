@@ -84,7 +84,7 @@
 				<legend>Add another Product to this Customer</legend>
 				<div class="row">
 					<div class="col-50">
-						<label for=>Product:</label>
+						<label for=>Product:</label> 
 					</div>
 					<div class="col-25">
 						<select name="product">

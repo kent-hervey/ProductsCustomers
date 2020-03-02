@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "products")
 public class Product {
@@ -58,8 +60,10 @@ public class Product {
 
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "products_customers", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "customer_id"))
+	@JsonIgnore
+	//@JsonBackReference
 	private List<Customer> customers;
 
 	public Long getId() {
