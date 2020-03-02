@@ -21,11 +21,11 @@
 				<form:form action="/products" method="POST" modelAttribute="product">
 				
 				
-				<form:label path="name">Name</form:label>
+				<form:label path="name">Name (minimum 3 characters)</form:label>
 				<form:errors path="name"/>
 				<form:input path="name"/>
 				
-				<form:label path="modelNumber">Model</form:label>
+				<form:label path="modelNumber">Model (minimum 3 characters)</form:label>
 				<form:errors path="modelNumber"/>
 				<form:input path="modelNumber"/>			
 				
@@ -34,7 +34,7 @@
 				<form:input path="listPrice"/>			
 				
 		
-				<form:label path="description">Description</form:label>
+				<form:label path="description">Description (minimum 3 characters)</form:label>
 				<form:errors path="description"/>
 				<form:input path="description"/>
 				
