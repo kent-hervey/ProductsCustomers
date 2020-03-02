@@ -125,6 +125,10 @@ public class ProductController {
 	public String showEditProduct(@PathVariable("id") Long productId, Model model) {
 		
 		Product product = apiService.fetchThisProduct(productId);
+		if(product==null) {
+			return "productsFiles/showProducts.jsp";
+		}
+		
 		model.addAttribute("product", product);
 
 		return "productsFiles/editProduct.jsp";
