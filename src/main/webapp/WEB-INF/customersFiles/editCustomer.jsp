@@ -22,19 +22,19 @@
 					modelAttribute="customer">
 					<input type="hidden" name="_method" value="put">
 
-				<form:label path="name">Name</form:label>
+				<form:label path="name">Name (minimum 3 characters)</form:label>
 				<form:errors path="name"/>
 				<form:input path="name"/>
 				
-				<form:label path="ContactName">Contact Name</form:label>
+				<form:label path="ContactName">Contact Name (minimum 3 characters)</form:label>
 				<form:errors path="ContactName"/>
 				<form:input path="ContactName"/>			
 				
-				<form:label path="contactEmail">Contact Email</form:label>
+				<form:label path="contactEmail">Contact Email (valid email format)</form:label>
 				<form:errors path="contactEmail"/>
 				<form:input path="contactEmail"/>	
 				
-				<form:label path="location">Location</form:label>
+				<form:label path="location">Location (minimum 3 characters)</form:label>
 				<form:errors path="location"/>
 				<form:input path="location"/>		
 

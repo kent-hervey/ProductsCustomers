@@ -27,6 +27,8 @@ import com.hervey.app.services.ApiService;
 public class CustomerController {
 	private final ApiService apiService;
 
+	// This is the develop branch!
+
 	public CustomerController(ApiService apiService) {
 		this.apiService = apiService;
 	}
@@ -100,8 +102,13 @@ public class CustomerController {
 	// Renders Show Customer Page
 	@GetMapping("/{customerId}")
 	public String showCustomer(@ModelAttribute("productCustomer") ProductCustomer productCustomer,
-			@PathVariable("customerId") Long customerId, Model model) {
+		@PathVariable("customerId") Long customerId, Model model) {
 		Customer customer = apiService.fetchThisCustomer(customerId);
+		if(customer==null) {
+			return "customersFiles/showCustomers.jsp";
+		}
+		
+		
 		model.addAttribute("customer", customer);
 
 		List<ProductCustomer> productCustomers = apiService.fetchAllProductCustomers();
@@ -119,6 +126,9 @@ public class CustomerController {
 	public String showEditProduct(@PathVariable("customerId") Long customerId, Model model) {
 
 		Customer customer = apiService.fetchThisCustomer(customerId);
+		if(customer==null) {
+			return "customersFiles/showCustomers.jsp";
+		}
 		model.addAttribute("customer", customer);
 
 		return "customersFiles/editCustomer.jsp";
@@ -133,7 +143,9 @@ public class CustomerController {
 		}
 
 		apiService.updateCustomer(customer);
-
+		//remove below
+		System.out.println(customer.getId());
+		
 		//return "redirect:/customer";
 		return "redirect:/customers/" + customer.getId();
 	}
