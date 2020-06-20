@@ -9,7 +9,7 @@
 <head>
 	<link rel="stylesheet" href="/css/styles.css"/>
 <meta charset="ISO-8859-1">
-<title>JSP display test</title>
+<title>Customers Products</title>
 </head>
 
 <body>
