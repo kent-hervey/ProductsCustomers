@@ -1,5 +1,6 @@
 package com.hervey.app.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -91,6 +92,20 @@ public class ApiController {
 		return customer;
 	}
 	
+	//Get customers only for specified product
+	@GetMapping("/customers/products/{productId}")
+	public List<Customer> showCustomersOnlyForProduct(@PathVariable("productId") Long productId) {
+		Product product =apiService.fetchThisProduct(productId);
+		if(product == null) {
+			List<Customer> customers = new ArrayList<Customer>();
+			
+			return  customers;
+		}
+		
+		List<Customer> customers =product.getCustomers();
+		return customers;
+	}
+	
 	
 	//Get customer and products for specified customer with customer shown
 	@GetMapping("/customers/{customerId}/products")
@@ -154,9 +169,13 @@ public class ApiController {
 	//Get products only for specified customer
 	@GetMapping("/products/customers/{customerId}")
 	public List<Product> showProductsOnlyForCustomer(@PathVariable("customerId") Long customerId ) {
-		List<Product> products = apiService.fetchThisCustomer(customerId).getProducts();
 		
-		return products;
+		Customer customer = apiService.fetchThisCustomer(customerId);
+		if(customer == null ) {
+			return new ArrayList<Product>();
+		}
+		
+		return customer.getProducts();
 		
 	}
 		
