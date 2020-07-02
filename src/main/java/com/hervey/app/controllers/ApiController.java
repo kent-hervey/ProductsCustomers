@@ -151,6 +151,15 @@ public class ApiController {
 		return allProducts;
 	}
 
+	//Get products only for specified customer
+	@GetMapping("/products/customers/{customerId}")
+	public List<Product> showProductsOnlyForCustomer(@PathVariable("customerId") Long customerId ) {
+		List<Product> products = apiService.fetchThisCustomer(customerId).getProducts();
+		
+		return products;
+		
+	}
+		
 	
 
 	//Get product and customers for specified product with product shown
