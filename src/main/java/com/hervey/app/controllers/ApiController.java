@@ -92,7 +92,7 @@ public class ApiController {
 	}
 	
 	
-	//Get products for specified customer with customer shown
+	//Get customer and products for specified customer with customer shown
 	@GetMapping("/customers/{customerId}/products")
 	public ListProductsForCustomer showProductsForCustomer(@ModelAttribute("productCustomer") ProductCustomer productCustomer, @PathVariable("customerId") Long customerId, Model model) {
 		Customer customer = apiService.fetchThisCustomer(customerId);
@@ -153,7 +153,7 @@ public class ApiController {
 
 	
 
-	//Get customers for specified product with product shown
+	//Get product and customers for specified product with product shown
 	@GetMapping("/products/{productId}/customers")
 	public ListCustomersForProducts showCustomersForProduct(@ModelAttribute("productCustomer") ProductCustomer productCustomer, @PathVariable("productId") Long productId, Model model, BindingResult result) {
 
