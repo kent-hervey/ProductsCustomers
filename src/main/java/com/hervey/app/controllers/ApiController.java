@@ -165,6 +165,14 @@ public class ApiController {
 		List<Product> allProducts = apiService.fetchAllProducts();
 		return allProducts;
 	}
+	
+	//Get one product...
+	@GetMapping("/products/{id}")
+	public Product showProduct(@PathVariable("id") Long productId) {
+		Product product = apiService.fetchThisProduct(productId);
+		return product;
+	}
+	
 
 	//Get products only for specified customer
 	@GetMapping("/products/customers/{customerId}")
