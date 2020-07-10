@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -76,8 +77,9 @@ public class ApiController {
 	}
 	
 	//Add a customer
+	//@PostMapping(value = "/customers" , produces={"application/json; charset=UTF-8"})
 	@PostMapping("/customers")
-	public Customer createCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult result ) {
+	public Customer createCustomer(@RequestBody Customer customer) {
 		apiService.saveCustomer(customer);
 		return customer;
 	}
