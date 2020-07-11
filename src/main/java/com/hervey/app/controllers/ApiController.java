@@ -85,15 +85,22 @@ public class ApiController {
 	}
 	
 	//Modify a customer
+	
 	@PutMapping("/customers/{id}")
-	public Customer modifyCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult result ) {
-		if(result.hasErrors()) {
-			return null;
-		}
+	public Customer modifyCustomer(@RequestBody Customer customer) {
 		apiService.updateCustomer(customer);
 		return customer;
 	}
 	
+//	@PutMapping("/customers/{id}")
+//	public Customer modifyCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult result ) {
+//		if(result.hasErrors()) {
+//			return null;
+//		}
+//		apiService.updateCustomer(customer);
+//		return customer;
+//	}
+//	
 	//Get customers only for specified product
 	@GetMapping("/customers/products/{productId}")
 	public List<Customer> showCustomersOnlyForProduct(@PathVariable("productId") Long productId) {
