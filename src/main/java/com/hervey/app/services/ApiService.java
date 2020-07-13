@@ -133,6 +133,11 @@ public class ApiService {
 		return customerRepository.findAll();
 	}
 
+	public boolean fetchIsCustomerProduct(Long productId, Long customerId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 	
 	

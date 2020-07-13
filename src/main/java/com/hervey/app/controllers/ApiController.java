@@ -115,6 +115,16 @@ public class ApiController {
 		return customers;
 	}
 	
+	//Does this customer have this product
+	@GetMapping("/customers/{customerId}/products/{productId}")
+	public boolean customerProductIsTrue(@PathVariable("productId") Long productId, @PathVariable("customerId") Long customerId) {
+		
+		return apiService.fetchIsCustomerProduct(productId, customerId);
+	}
+	
+	
+	
+	
 	
 	//Get customer and products for specified customer with customer shown
 	@GetMapping("/customers/{customerId}/products")
