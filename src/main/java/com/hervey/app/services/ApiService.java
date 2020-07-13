@@ -134,7 +134,14 @@ public class ApiService {
 	}
 
 	public boolean fetchIsCustomerProduct(Long productId, Long customerId) {
-		// TODO Auto-generated method stub
+		Product product = productRepository.findById(productId).orElse(null);
+		Customer customer = customerRepository.findById(customerId).orElse(null);
+		ProductCustomer productCustomer = productCustomerRepository.findByProductAndCustomer(product, customer);
+		System.out.println("productCustomer:  " + productCustomer);
+		if(productCustomer !=null) {
+			return true;
+		}
+		
 		return false;
 	}
 
