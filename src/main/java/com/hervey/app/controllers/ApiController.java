@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +23,7 @@ import com.hervey.app.dto.ListProductsForCustomer;
 import com.hervey.app.models.Customer;
 import com.hervey.app.models.Product;
 import com.hervey.app.models.ProductCustomer;
+import com.hervey.app.models.Vendor;
 import com.hervey.app.services.ApiService;
 
 
@@ -36,7 +38,23 @@ public class ApiController {
 		this.apiService = apiService;
 	}
 	
-	//customers at top, then products
+	//vendor at top, then customers, then products
+	
+	//Show Vendor
+	@GetMapping(path= {"/vendor"}) //value also works instead of path
+	public ResponseEntity<Vendor> showVendor() {
+		return ResponseEntity.ok(apiService.fetchVendor());
+	}
+	
+	//Modify the vendor:  Note, there is only one
+	@PutMapping("/vendor")
+	public ResponseEntity<Vendor> modifyVendor(@RequestBody Vendor vendor) {
+		return ResponseEntity.ok(apiService.upateVendor(vendor));
+	}
+	
+	
+	
+	//CUSTOMERS
 	
 	//Get all the customers
 	@GetMapping("/customers")
@@ -85,7 +103,6 @@ public class ApiController {
 	}
 	
 	//Modify a customer
-	
 	@PutMapping("/customers/{id}")
 	public Customer modifyCustomer(@RequestBody Customer customer) {
 		apiService.updateCustomer(customer);
@@ -115,16 +132,6 @@ public class ApiController {
 		return customers;
 	}
 	
-	//Does this customer have this product
-	@GetMapping("/customers/{customerId}/products/{productId}")
-	public boolean customerProductIsTrue(@PathVariable("productId") Long productId, @PathVariable("customerId") Long customerId) {
-		return apiService.fetchIsCustomerProduct(productId, customerId);
-	}
-	
-	
-	
-	
-	
 	//Get customer and products for specified customer with customer shown
 	@GetMapping("/customers/{customerId}/products")
 	public ListProductsForCustomer showProductsForCustomer(@ModelAttribute("productCustomer") ProductCustomer productCustomer, @PathVariable("customerId") Long customerId, Model model) {
@@ -141,6 +148,11 @@ public class ApiController {
 		return new ListProductsForCustomer(customer.getId(), customer.getContactEmail(), customer.getContactName(), customer.getLocation(), customer.getName(), customer.getProducts());
 	}
 	
+		//Does this customer have this product
+	@GetMapping("/customers/{customerId}/products/{productId}")
+	public boolean customerProductIsTrue(@PathVariable("productId") Long productId, @PathVariable("customerId") Long customerId) {
+		return apiService.fetchIsCustomerProduct(productId, customerId);
+	}
 	
 	//Add product to specified customer
 	@PostMapping("/customers/{customerId}/products/{productId}")

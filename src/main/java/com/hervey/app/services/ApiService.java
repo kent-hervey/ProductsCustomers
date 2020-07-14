@@ -120,6 +120,10 @@ public class ApiService {
 		productCustomerRepository.delete(productCustomer);
 	}
 
+	public Vendor upateVendor(Vendor vendor) {
+		return vendorRepository.save(vendor);
+	}
+	
 	public void updateProduct(@Valid Product product) {
 		productRepository.save(product);
 	}
@@ -144,6 +148,8 @@ public class ApiService {
 		
 		return false;
 	}
+
+
 
 
 	
