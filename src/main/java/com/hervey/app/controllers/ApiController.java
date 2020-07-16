@@ -26,89 +26,83 @@ import com.hervey.app.models.ProductCustomer;
 import com.hervey.app.models.Vendor;
 import com.hervey.app.services.ApiService;
 
-
-
 @RequestMapping("/api")
 @RestController
 public class ApiController {
 	private final ApiService apiService;
-	
-	
+
 	public ApiController(ApiService apiService) {
 		this.apiService = apiService;
 	}
-	
-	//vendor at top, then customers, then products
-	
-	//Show Vendor
-	@GetMapping(path= {"/vendor"}) //value also works instead of path
+
+	// vendor at top, then customers, then products
+
+	// Show Vendor
+	@GetMapping(path = { "/vendor" }) // value also works instead of path
 	public ResponseEntity<Vendor> showVendor() {
 		return ResponseEntity.ok(apiService.fetchVendor());
 	}
-	
-	//Modify the vendor:  Note, there is only one
+
+	// Modify the vendor: Note, there is only one
 	@PutMapping("/vendor")
 	public ResponseEntity<Vendor> modifyVendor(@RequestBody Vendor vendor) {
 		return ResponseEntity.ok(apiService.upateVendor(vendor));
 	}
-	
-	
-	
-	//CUSTOMERS
-	
-	//Get all the customers
+
+	// CUSTOMERS
+
+	// Get all the customers
 	@GetMapping("/customers")
-	public List<Customer> showAllCustomers(){
+	public List<Customer> showAllCustomers() {
 		List<Customer> allCustomers = apiService.fetchAllCustomers();
 		return allCustomers;
 	}
-	
-	//Get number of customers
+
+	// Get number of customers
 	@GetMapping("/customers-number-of")
-	public int showNumberCustomers(){
+	public int showNumberCustomers() {
 		List<Customer> allCustomers = apiService.fetchAllCustomers();
 		return allCustomers.size();
 	}
-	
-	//Get list of valid IDs for customers
+
+	// Get list of valid IDs for customers
 	@GetMapping("/customers-ids")
-	public List<Integer> showCustomerIds(){
+	public List<Integer> showCustomerIds() {
 		System.out.println(apiService.fetchAllCustomerIDs());
 		return apiService.fetchAllCustomerIDs();
 	}
-	
-	
-	//show one customer's id
+
+	// show one customer's id
 	@GetMapping("/customers-id/{id}")
 	public Long showCustomerID(@PathVariable("id") Long customerId) {
 		Customer customer = apiService.fetchThisCustomer(customerId);
 		return customer.getId();
-	
+
 	}
-	
-	
-	//Get one customer...
+
+	// Get one customer...
 	@GetMapping("/customers/{id}")
 	public Customer showCustomer(@PathVariable("id") Long customerId) {
 		Customer customer = apiService.fetchThisCustomer(customerId);
 		return customer;
 	}
-	
-	//Add a customer
-	//@PostMapping(value = "/customers" , produces={"application/json; charset=UTF-8"})
+
+	// Add a customer
+	// @PostMapping(value = "/customers" , produces={"application/json;
+	// charset=UTF-8"})
 	@PostMapping("/customers")
 	public Customer createCustomer(@RequestBody Customer customer) {
 		apiService.saveCustomer(customer);
 		return customer;
 	}
-	
-	//Modify a customer
+
+	// Modify a customer
 	@PutMapping("/customers/{id}")
 	public Customer modifyCustomer(@RequestBody Customer customer) {
 		apiService.updateCustomer(customer);
 		return customer;
 	}
-	
+
 //	@PutMapping("/customers/{id}")
 //	public Customer modifyCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult result ) {
 //		if(result.hasErrors()) {
@@ -118,45 +112,51 @@ public class ApiController {
 //		return customer;
 //	}
 //	
-	//Get customers only for specified product
+	// Get customers only for specified product
 	@GetMapping("/customers/products/{productId}")
 	public List<Customer> showCustomersOnlyForProduct(@PathVariable("productId") Long productId) {
-		Product product =apiService.fetchThisProduct(productId);
-		if(product == null) {
+		Product product = apiService.fetchThisProduct(productId);
+		if (product == null) {
 			List<Customer> customers = new ArrayList<Customer>();
-			
-			return  customers;
+
+			return customers;
 		}
-		
-		List<Customer> customers =product.getCustomers();
+
+		List<Customer> customers = product.getCustomers();
 		return customers;
 	}
-	
-	//Get customer and products for specified customer with customer shown
+
+	// Get customer and products for specified customer with customer shown
 	@GetMapping("/customers/{customerId}/products")
-	public ListProductsForCustomer showProductsForCustomer(@ModelAttribute("productCustomer") ProductCustomer productCustomer, @PathVariable("customerId") Long customerId, Model model) {
+	public ListProductsForCustomer showProductsForCustomer(
+			@ModelAttribute("productCustomer") ProductCustomer productCustomer,
+			@PathVariable("customerId") Long customerId, Model model) {
 		Customer customer = apiService.fetchThisCustomer(customerId);
-		if(customer ==  null) {
+		if (customer == null) {
 			return new ListProductsForCustomer();
 		}
 
-		//List<Product> productsWithCustomer = apiService.fetchProductsWithThisCustomer(customer);
-		//model.addAttribute("productsWithCustomer", productsWithCustomer);
-		//return productsWithCustomer;
-		
-		
-		return new ListProductsForCustomer(customer.getId(), customer.getContactEmail(), customer.getContactName(), customer.getLocation(), customer.getName(), customer.getProducts());
+		// List<Product> productsWithCustomer =
+		// apiService.fetchProductsWithThisCustomer(customer);
+		// model.addAttribute("productsWithCustomer", productsWithCustomer);
+		// return productsWithCustomer;
+
+		return new ListProductsForCustomer(customer.getId(), customer.getContactEmail(), customer.getContactName(),
+				customer.getLocation(), customer.getName(), customer.getProducts());
 	}
-	
-		//Does this customer have this product
+
+	// Does this customer have this product
 	@GetMapping("/customers/{customerId}/products/{productId}")
-	public boolean customerProductIsTrue(@PathVariable("productId") Long productId, @PathVariable("customerId") Long customerId) {
+	public boolean customerProductIsTrue(@PathVariable("productId") Long productId,
+			@PathVariable("customerId") Long customerId) {
 		return apiService.fetchIsCustomerProduct(productId, customerId);
 	}
-	
-	//Add product to specified customer
+
+	// Add product to specified customer
 	@PostMapping("/customers/{customerId}/products/{productId}")
-	public ProductCustomer addProductToCustomer(@Valid @ModelAttribute("productCustomer") ProductCustomer productCustomer, @PathVariable("customerId") Long customerId, @PathVariable("productId") Long productId) {
+	public ProductCustomer addProductToCustomer(
+			@Valid @ModelAttribute("productCustomer") ProductCustomer productCustomer,
+			@PathVariable("customerId") Long customerId, @PathVariable("productId") Long productId) {
 		Product product = apiService.fetchThisProduct(productId);
 		Customer customer = apiService.fetchThisCustomer(customerId);
 		productCustomer.setCustomer(customer);
@@ -165,120 +165,109 @@ public class ApiController {
 		apiService.saveProductCustomer(productCustomer);
 		return productCustomer;
 	}
-	 
-	//Deletes product from specified customer
+
+	// Deletes product from specified customer
 	@DeleteMapping("/customers/{customerId}/products/{productId}")
-	public String deleteProductFromCustomer(@PathVariable("customerId") Long customerId, @PathVariable("productId") Long productId) {
+	public String deleteProductFromCustomer(@PathVariable("customerId") Long customerId,
+			@PathVariable("productId") Long productId) {
 		apiService.deleteProductFromCustomer(customerId, productId);
 		return "deleted";
 	}
-	
-	//Delete customer with this customerId
+
+	// Delete customer with this customerId
 	@DeleteMapping("/customers/{customerId}")
 	public String deleteCustomer(@PathVariable("customerId") Long customerId) {
 		Customer customer = apiService.fetchThisCustomer(customerId);
 		apiService.deleteThisCustomer(customer);
-		
+
 		return "customer deleted";
 	}
-	
-	
-	
-	
-	
-	//End Customers, begin Products
-	
-	
-	//Get all the products only
+
+	// ==================================
+	// End Customers, begin Products
+
+	// Get all the products only
 	@GetMapping("/products")
-	public List<Product> showAllProducts(){
+	public List<Product> showAllProducts() {
 		List<Product> allProducts = apiService.fetchAllProducts();
 		return allProducts;
 	}
-	
-	//Get one product...
+
+	// Get one product...
 	@GetMapping("/products/{id}")
 	public Product showProduct(@PathVariable("id") Long productId) {
 		Product product = apiService.fetchThisProduct(productId);
 		return product;
 	}
-	
 
-	//Get products only for specified customer
+	// Get products only for specified customer
 	@GetMapping("/products/customers/{customerId}")
-	public List<Product> showProductsOnlyForCustomer(@PathVariable("customerId") Long customerId ) {
-		
+	public List<Product> showProductsOnlyForCustomer(@PathVariable("customerId") Long customerId) {
+
 		Customer customer = apiService.fetchThisCustomer(customerId);
-		if(customer == null ) {
+		if (customer == null) {
 			return new ArrayList<Product>();
 		}
-		
-		return customer.getProducts();
-		
-	}
-		
-	
 
-	//Get product and customers for specified product with product shown
+		return customer.getProducts();
+
+	}
+
+	// Get product and customers for specified product with product shown
 	@GetMapping("/products/{productId}/customers")
-	public ListCustomersForProducts showCustomersForProduct(@ModelAttribute("productCustomer") ProductCustomer productCustomer, @PathVariable("productId") Long productId, Model model, BindingResult result) {
+	public ListCustomersForProducts showCustomersForProduct(
+			@ModelAttribute("productCustomer") ProductCustomer productCustomer,
+			@PathVariable("productId") Long productId, Model model, BindingResult result) {
 
 		Product product = apiService.fetchThisProduct(productId);
-		if(product ==  null) {
+		if (product == null) {
 			return new ListCustomersForProducts();
 		}
 
-		//List<Product> productsWithCustomer = apiService.fetchProductsWithThisCustomer(customer);
-		//model.addAttribute("productsWithCustomer", productsWithCustomer);
-		//return productsWithCustomer;
-		
-		
-		return new ListCustomersForProducts(product.getId(), product.getName(), product.getModelNumber(), product.getDescription(), product.getCustomers());
+		// List<Product> productsWithCustomer =
+		// apiService.fetchProductsWithThisCustomer(customer);
+		// model.addAttribute("productsWithCustomer", productsWithCustomer);
+		// return productsWithCustomer;
+
+		return new ListCustomersForProducts(product.getId(), product.getName(), product.getModelNumber(),
+				product.getDescription(), product.getCustomers());
 	}
 
-	//Add a product
+	// Add a product
 	@PostMapping("/products")
-	public Product createProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
+	public Product createProduct(@RequestBody Product product, BindingResult result) {
 		apiService.saveProduct(product);
 		return product;
 	}
-	
-	//Add customer to specified product
+
+	// Add customer to specified product
 	@PostMapping("/products/{productId}/customers/{customerId}")
-	public ProductCustomer addCustomerToProduct(@Valid @ModelAttribute("productCustomer") ProductCustomer productCustomer, @PathVariable("productId") Long productId, @PathVariable("customerId") Long customerId) {
+	public ProductCustomer addCustomerToProduct(
+			@Valid @ModelAttribute("productCustomer") ProductCustomer productCustomer,
+			@PathVariable("productId") Long productId, @PathVariable("customerId") Long customerId) {
 		Customer customer = apiService.fetchThisCustomer(customerId);
 		Product product = apiService.fetchThisProduct(productId);
 		productCustomer.setProduct(product);
 		productCustomer.setCustomer(customer);
 		apiService.saveProductCustomer(productCustomer);
 		return productCustomer;
-		
-		
+
 	}
-	
-	 //Deletes customer from specified product
+
+	// Deletes customer from specified product
 	@DeleteMapping("/products/{productId}/customers/{customerId}")
-	public String deleteCustomerFromProduct(@PathVariable("productId") Long productId, @PathVariable("customerId") Long customerId) {
+	public String deleteCustomerFromProduct(@PathVariable("productId") Long productId,
+			@PathVariable("customerId") Long customerId) {
 		apiService.deleteCustomerFromProduct(productId, customerId);
 		return "deleted";
 	}
-	
-	//Delete product with this ID
+
+	// Delete product with this ID
 	@DeleteMapping("/products/{productId}")
 	public String deleteProduct(@PathVariable("productId") Long productId) {
 		Product product = apiService.fetchThisProduct(productId);
 		apiService.deleteThisProduct(product);
 		return "product deleted";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
