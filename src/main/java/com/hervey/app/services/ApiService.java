@@ -120,7 +120,7 @@ public class ApiService {
 		productCustomerRepository.delete(productCustomer);
 	}
 
-	public Vendor upateVendor(Vendor vendor) {
+	public Vendor updateVendor(Vendor vendor) {
 		return vendorRepository.save(vendor);
 	}
 	
