@@ -72,12 +72,14 @@ public class ApiController {
 		return apiService.fetchAllCustomerIDs();
 	}
 
-	// show one customer's id
+	// Check if customer id is valid
 	@GetMapping("/customers-id/{id}")
-	public Long showCustomerID(@PathVariable("id") Long customerId) {
+	public boolean showCustomerID(@PathVariable("id") Long customerId) {
 		Customer customer = apiService.fetchThisCustomer(customerId);
-		return customer.getId();
-
+		if(customer !=null) {
+		return true;
+		}
+		return false; //indicates no customer with submitted ID
 	}
 
 	// Get one customer...
@@ -118,10 +120,8 @@ public class ApiController {
 		Product product = apiService.fetchThisProduct(productId);
 		if (product == null) {
 			List<Customer> customers = new ArrayList<Customer>();
-
 			return customers;
 		}
-
 		List<Customer> customers = product.getCustomers();
 		return customers;
 	}
