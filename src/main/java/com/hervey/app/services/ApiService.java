@@ -46,6 +46,16 @@ public class ApiService {
 		return idList;
 	}
 
+	public List<Integer> fetchAllProductIDs() {
+		List<Integer> idList = new ArrayList<Integer>();
+		for(Product product : productRepository.findAll()) {
+			System.out.println("this product is:  " + product.toString());
+			idList.add(product.getId().intValue());
+		}
+		return idList;
+	}
+	
+	
 	public Vendor fetchVendor() {
 		return vendorRepository.findById((long) 1).orElse(null);
 
@@ -148,6 +158,8 @@ public class ApiService {
 		
 		return false;
 	}
+
+
 
 
 

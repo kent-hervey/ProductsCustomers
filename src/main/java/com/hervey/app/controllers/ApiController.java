@@ -76,10 +76,10 @@ public class ApiController {
 	@GetMapping("/customers-id/{id}")
 	public boolean showCustomerID(@PathVariable("id") Long customerId) {
 		Customer customer = apiService.fetchThisCustomer(customerId);
-		if(customer !=null) {
-		return true;
+		if (customer != null) {
+			return true;
 		}
-		return false; //indicates no customer with submitted ID
+		return false; // indicates no customer with submitted ID
 	}
 
 	// Get one customer...
@@ -192,6 +192,22 @@ public class ApiController {
 		return product;
 	}
 
+	// Fetch list of product IDs
+	@GetMapping("/product-ids")
+	public List<Integer> showProductIds() {
+		return apiService.fetchAllProductIDs();
+	}
+
+	// Check if product id is valid
+	@GetMapping("/products-id/{id}")
+	public boolean showProductID(@PathVariable("id") Long productId) {
+		Product product = apiService.fetchThisProduct(productId);
+		if (product != null) {
+			return true;
+		}
+		return false; // indicates no product with submitted ID
+	}
+
 	// Get products only for specified customer
 	@GetMapping("/products/customers/{customerId}")
 	public List<Product> showProductsOnlyForCustomer(@PathVariable("customerId") Long customerId) {
@@ -232,14 +248,13 @@ public class ApiController {
 		return product;
 	}
 
-	//Modify or update a product
+	// Modify or update a product
 	@PutMapping("/products/{id}")
 	public Product modifyProduct(@RequestBody Product product) {
 		apiService.updateProduct(product);
 		return product;
 	}
-	
-	
+
 	// Add customer to specified product
 	@PostMapping("/products/{productId}/customers/{customerId}")
 	public ProductCustomer addCustomerToProduct(
@@ -254,11 +269,13 @@ public class ApiController {
 
 	}
 
-	
-	
-	
-	
-	
+	// Get number of products
+	@GetMapping("/products-number-of")
+	public int showNumberProducts() {
+		List<Product> allProducts = apiService.fetchAllProducts();
+		return allProducts.size();
+	}
+
 	// Deletes customer from specified product
 	@DeleteMapping("/products/{productId}/customers/{customerId}")
 	public String deleteCustomerFromProduct(@PathVariable("productId") Long productId,
