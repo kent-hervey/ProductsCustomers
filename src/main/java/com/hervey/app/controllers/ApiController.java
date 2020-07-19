@@ -232,6 +232,14 @@ public class ApiController {
 		return product;
 	}
 
+	//Modify or update a product
+	@PutMapping("/products/{id}")
+	public Product modifyProduct(@RequestBody Product product) {
+		apiService.updateProduct(product);
+		return product;
+	}
+	
+	
 	// Add customer to specified product
 	@PostMapping("/products/{productId}/customers/{customerId}")
 	public ProductCustomer addCustomerToProduct(
@@ -246,6 +254,11 @@ public class ApiController {
 
 	}
 
+	
+	
+	
+	
+	
 	// Deletes customer from specified product
 	@DeleteMapping("/products/{productId}/customers/{customerId}")
 	public String deleteCustomerFromProduct(@PathVariable("productId") Long productId,
