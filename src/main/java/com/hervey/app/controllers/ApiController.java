@@ -46,7 +46,7 @@ public class ApiController {
 	// Modify the vendor: Note, there is only one
 	@PutMapping("/vendor")
 	public ResponseEntity<Vendor> modifyVendor(@RequestBody Vendor vendor) {
-		return ResponseEntity.ok(apiService.upateVendor(vendor));
+		return ResponseEntity.ok(apiService.updateVendor(vendor));
 	}
 
 	// CUSTOMERS
@@ -105,15 +105,6 @@ public class ApiController {
 		return customer;
 	}
 
-//	@PutMapping("/customers/{id}")
-//	public Customer modifyCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult result ) {
-//		if(result.hasErrors()) {
-//			return null;
-//		}
-//		apiService.updateCustomer(customer);
-//		return customer;
-//	}
-//	
 	// Get customers only for specified product
 	@GetMapping("/customers/products/{productId}")
 	public List<Customer> showCustomersOnlyForProduct(@PathVariable("productId") Long productId) {
@@ -153,6 +144,7 @@ public class ApiController {
 	}
 
 	// Add product to specified customer
+	// To be updated to include adding serial number and purchase date
 	@PostMapping("/customers/{customerId}/products/{productId}")
 	public ProductCustomer addProductToCustomer(
 			@Valid @ModelAttribute("productCustomer") ProductCustomer productCustomer,
