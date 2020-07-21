@@ -34,61 +34,71 @@ Note:  this means that adding or deleting a product to/from a customer also mean
 
 
 ## API Documentation
+Note:  all use content-type:  application/json & Media-type:  JSON
 
-### Customer side:
-
-GET:
-
-api/customers:  Shows all customers
-
-api/customers-number-of:  Shows number of customers
-
-api/customers-ids:  Shows list of valid customer ids as an arrayList of Integers
-
-api/customers/{customerId}:  Shows customer with specified customer ID and maybe their products
-
-api/customers/{customerId}/products:  Shows customer with specified customer ID and all their products.  If customer does not exist, then returns null for customer fields
-
-POST:
-
-api/customers:  adds a single customer. Required fields: String name [min 3 char]; String location [min 3 char]; String contactName [min 3 char]; String contactEmail [valid email format]
-
-api/customers/{customerId}/products/{productId}:  Adds product {productId} to customer {customerId}.  Required fields:  none.  Expected fields:  Date purchaseDate pattern = "yyyy-MM-dd", String serialNumber 
-
-DELETE:
-
-api/customers/{customerId}/products/{productId}: Deletes specified product from specified customer
-
-api/customers/{customerId}:  Deletes specified customer
-
-PUT:
-api/customers/{customerId}:  Modifies fields of existing customer.  Required fields: String name [min 3 char]; String location [min 3 char]; String contactName [min 3 char]; String contactEmail [valid email format]
+RU for Vendor...this is the entity that owns the products and the customers being tracked:
+* Fetch  Vendor info
+  *   GET  api/vendor  Note;  did not specify vendor as there is always only one
+* Update Vendor info
+  *   PUT api/vendor  
 
 
-### Product side:
+CRUD for Customers:
+* Add a customer
+  *  Post api/customers
+* Fetch all customers
+  * Get  api/customers
+* Fetch all customers of product {id} showing only customers
+  * GET api/customers/products/{id}
+Fetch all products for customer 3
+GET api/customers/4/products
+Fetch customer 1
+Get api/customers/1
+Update customer 1
+PUT   api/customers/1
+Delete customer 21
+Delete  api/customers/21
+CRUD for middle/Join table of Customers-Products
+Add product 3 to customer 1, Note:  also adds customer 1 to product 3
+Post  /api/customers/1/products/3
+OR
+pending Post /api/products/3/customers/1
+Delete product 3 from customer 1
+Delete api/customers/4/products/1
+OR
+Delete api/products/1/customers/4
+CRUD for Products
+Add a product
+Post api/products
+Fetch all products
+GET api/products
+Fetch all products of customer 3 showing only products
+GET api/products/customers/3
+Fetch all customers for product 3 with product showing
+GET api/products/3/customers 
+Fetch product,  #1
+GET api/products/1
+Update product 1
+PUT api/products/1
+Delete a product
+PUT api/products/22
+Other
+Does Customer have this product/check to see if product 3 to customer 1 exists
+Get api/customers/1/products/3
+Fetch number of customers
+GET api/customers-customers-number-of
+Fetch list of customer IDs
+GET api/customer-ids
+Check validity of customer id; returns true or false
+Get api/customers-id/15
+Fetch number of products
+Get api/proudcts-number-of
+Fetch list of product IDs
+Get api/product-ids
+Check validity of product id; returns true or false
+Get api/products-id/1
 
-GET:
 
-api/products:  Shows all products
-
-api/products/{productId}/customers:  Shows product with specified product ID and all their customers.  If product does not exist, then returns null for product fields
-
-POST:
-
-api/products:  adds a single product.  Required fields:  String name [min 3 char]; String description [min 3 char]; Double listPrice; String modelNumber [min 3 char]
-
-api/products/{productsId}/customers/{customerId}:  Adds customer {customerId} to product {productId}.  Required fields:  none.  Expected fields:  Date purchaseDate pattern = "yyyy-MM-dd", String serialNumber
-
-PUT:
-
-api/customers{id}: Modifies fields of existing product.  Required fields:  String name [min 3 char]; String description [min 3 char]; Double listPrice; String modelNumber [min 3 char]
-
-
-DELETE:
-
-api/products/{productId}/customers/{customersId}: Deletes specified customer from specified product
-
-api/products/{productId}:  Deletes the specified product
 
 
 ## Selected JSP Screenshots:
