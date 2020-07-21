@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="/css/styles.css"/>
 <meta charset="ISO-8859-1">
 <title>Customers Products</title>
+<!-- version 0.5 api additions -->
 </head>
 
 <body>
@@ -24,6 +25,7 @@
 			<ul>
 			  <li><a href="/customers">View By Customers</a></li>
 			  <li><a href="/products">View by Products</a></li>
+			  <li><a href="/api/customers">API view example of Customers</a></li>
 			</ul>
 		</div>
 	</div>
