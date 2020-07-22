@@ -47,56 +47,59 @@ CRUD for Customers:
 * Add a customer
   *  Post api/customers
 * Fetch all customers
-  * Get  api/customers
+  * GET  api/customers
 * Fetch all customers of product {id} showing only customers
   * GET api/customers/products/{id}
-Fetch all products for customer 3
-GET api/customers/4/products
-Fetch customer 1
-Get api/customers/1
-Update customer 1
-PUT   api/customers/1
-Delete customer 21
-Delete  api/customers/21
+* Fetch all products for customer {id}
+  * GET api/customers/{id}/products
+* Fetch customer {id}
+  * GET api/customers/{id}
+* Update customer {id}
+  * PUT   api/customers/{id}
+* Delete customer {id}
+  * DELETE  api/customers/{id}
+
 CRUD for middle/Join table of Customers-Products
-Add product 3 to customer 1, Note:  also adds customer 1 to product 3
-Post  /api/customers/1/products/3
-OR
-pending Post /api/products/3/customers/1
-Delete product 3 from customer 1
-Delete api/customers/4/products/1
-OR
-Delete api/products/1/customers/4
-CRUD for Products
-Add a product
-Post api/products
-Fetch all products
-GET api/products
-Fetch all products of customer 3 showing only products
-GET api/products/customers/3
-Fetch all customers for product 3 with product showing
-GET api/products/3/customers 
-Fetch product,  #1
-GET api/products/1
-Update product 1
-PUT api/products/1
-Delete a product
-PUT api/products/22
-Other
-Does Customer have this product/check to see if product 3 to customer 1 exists
-Get api/customers/1/products/3
-Fetch number of customers
-GET api/customers-customers-number-of
-Fetch list of customer IDs
-GET api/customer-ids
-Check validity of customer id; returns true or false
-Get api/customers-id/15
-Fetch number of products
-Get api/proudcts-number-of
-Fetch list of product IDs
-Get api/product-ids
-Check validity of product id; returns true or false
-Get api/products-id/1
+* Add product {prodId} to customer {custId}, Note:  also adds customer {custId} to product {prodId}
+  * POST  /api/customers/{custId}/products/{prodId}
+    * OR
+  * POST /api/products/{prodId}/customers/{custId}
+* Delete product {prodId} from customer {custId}
+  * DELETE api/customers/{custId}/products/{prodId}
+    * OR
+  * DELETE api/products/{prodId}/customers/{custId}
+
+CRUD for Products:
+* Add a product
+  * POST api/products
+* Fetch all products
+  * GET api/products
+* Fetch all products of customer {id} showing only products
+    * GET api/products/customers/{id}
+* Fetch all customers for product {id} with product showing
+    * GET api/products/{id}/customers 
+* Fetch product,  {id}
+    * GET api/products/{id}
+* Update product {id}
+    * PUT api/products/{id}
+* Delete product {id}
+    * DELETE api/products/{id}
+
+OtherP
+* Does Customer have this product/check to see if product {prodId} to customer {custId} exists
+    * GET api/customers/{custId}/products/{prodId}
+* Fetch number of customers
+    * GET api/customers-customers-number-of
+* Fetch list of customer IDs
+    * GET api/customer-ids
+* Check validity of customer id; returns true or false
+    *GET api/customers-id/{id}
+* Fetch number of products
+    * GET api/products-number-of
+* Fetch list of product IDs
+    * GET api/product-ids
+* Check validity of product id; returns true or false
+    * GET api/products-id/{id}
 
 
 
