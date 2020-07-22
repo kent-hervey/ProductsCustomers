@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name = "vendors")
 public class Vendor {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY) //ID for only vendor will be set to 1 by config class
 	private Long id;
 
 	private String companyName;
