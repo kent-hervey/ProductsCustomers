@@ -24,6 +24,7 @@ public class SetupDatabaseData implements ApplicationListener<ContextRefreshedEv
 			System.out.println("here we will add a record because books size is:  " + apiService.fetchCountVendors());
 			
 			Vendor vendor = new Vendor();
+			vendor.setId((long) 1);
 			vendor.setCompanyEmail("acme@acme.com");
 			vendor.setCompanyLocation("SmallvilleLocation");
 			vendor.setCompanyName("Acme Products");
