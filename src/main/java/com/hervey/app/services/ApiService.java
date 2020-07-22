@@ -58,7 +58,6 @@ public class ApiService {
 	
 	public Vendor fetchVendor() {
 		return vendorRepository.findById((long) 1).orElse(null);
-
 	}
 
 	public void saveProduct(Product product) {
@@ -134,6 +133,11 @@ public class ApiService {
 		return vendorRepository.save(vendor);
 	}
 	
+	public List<Vendor> fetchAllVendors() {
+		return vendorRepository.findAll();
+	}
+
+	
 	public void updateProduct(@Valid Product product) {
 		productRepository.save(product);
 	}
@@ -158,6 +162,13 @@ public class ApiService {
 		
 		return false;
 	}
+
+	public Long fetchCountVendors() {
+		return vendorRepository.count();
+	}
+
+
+
 
 
 

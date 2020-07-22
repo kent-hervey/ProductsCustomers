@@ -40,6 +40,7 @@ public class ApiController {
 	// Show Vendor
 	@GetMapping(path = { "/vendor" }) // value also works instead of path
 	public ResponseEntity<Vendor> showVendor() {
+		System.out.println("the vendor is:  " + apiService.fetchVendor());
 		return ResponseEntity.ok(apiService.fetchVendor());
 	}
 
@@ -49,6 +50,13 @@ public class ApiController {
 		return ResponseEntity.ok(apiService.updateVendor(vendor));
 	}
 
+	//Get all vendors
+	@GetMapping("/vendors")
+	public List<Vendor> showAllVendors() {
+		List<Vendor> vendors = apiService.fetchAllVendors();
+		return vendors;
+	}
+	
 	// CUSTOMERS
 
 	// Get all the customers
