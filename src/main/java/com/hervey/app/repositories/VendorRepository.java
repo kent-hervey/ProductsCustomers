@@ -11,4 +11,6 @@ import com.hervey.app.models.Vendor;
 public interface VendorRepository extends CrudRepository<Vendor, Long> {
 	List<Vendor> findAll();
 
+	Vendor findFirstByOrderById();
+
 }

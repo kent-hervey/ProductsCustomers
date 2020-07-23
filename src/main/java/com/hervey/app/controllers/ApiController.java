@@ -36,20 +36,6 @@ public class ApiController {
 	}
 
 	// vendor at top, then customers, then products
-
-	// Show Vendor
-	@GetMapping(path = { "/vendor" }) // value also works instead of path
-	public ResponseEntity<Vendor> showVendor() {
-		System.out.println("the vendor is:  " + apiService.fetchVendor());
-		return ResponseEntity.ok(apiService.fetchVendor());
-	}
-
-	// Modify the vendor: Note, there is only one
-	@PutMapping("/vendor")
-	public ResponseEntity<Vendor> modifyVendor(@RequestBody Vendor vendor) {
-		return ResponseEntity.ok(apiService.updateVendor(vendor));
-	}
-
 	//Get all vendors
 	@GetMapping("/vendors")
 	public List<Vendor> showAllVendors() {
@@ -57,6 +43,27 @@ public class ApiController {
 		return vendors;
 	}
 	
+	// Show Vendor
+	@GetMapping(path = { "/vendor" }) // value also works instead of path
+	public ResponseEntity<Vendor> showVendor() {
+		System.out.println("the vendor is:  " + apiService.fetchVendor());
+		return ResponseEntity.ok(apiService.fetchVendor());
+	}
+
+	//fetch ID of vendor
+	@GetMapping("vendor-id")  //should always be 1
+	public Long showVendorId() {
+		Vendor vendor = apiService.fetchVendor();
+		return vendor.getId();
+	}
+	
+	// Modify the vendor: Note, there is only one
+	@PutMapping("/vendor")
+	public ResponseEntity<Vendor> modifyVendor(@RequestBody Vendor vendor) {
+		return ResponseEntity.ok(apiService.updateVendor(vendor));
+	}
+
+
 	// CUSTOMERS
 
 	// Get all the customers

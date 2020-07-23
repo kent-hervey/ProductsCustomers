@@ -57,7 +57,7 @@ public class ApiService {
 	
 	
 	public Vendor fetchVendor() {
-		return vendorRepository.findById((long) 1).orElse(null);
+		return vendorRepository.findFirstByOrderById();
 	}
 
 	public void saveProduct(Product product) {
