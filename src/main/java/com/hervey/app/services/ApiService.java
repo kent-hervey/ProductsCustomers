@@ -55,7 +55,7 @@ public class ApiService {
 		return idList;
 	}
 	
-	
+	//fetches one vendor regardless
 	public Vendor fetchVendor() {
 		return vendorRepository.findFirstByOrderById();
 	}
