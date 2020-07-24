@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.hervey.app</groupId>
 	<artifactId>ProductsCustomers</artifactId>
-	<version>0.5-api</version>
+	<version>0.5-api-dbseed</version>
 	<name>ProductsCustomers</name>
 	<description>Products Customers with jsp and API interfaces
 
