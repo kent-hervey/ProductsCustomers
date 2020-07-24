@@ -53,7 +53,7 @@ public class ApiService {
 			idList.add(product.getId().intValue());
 		}
 		return idList;
-	}
+	} 
 	
 	//fetches one vendor regardless
 	public Vendor fetchVendor() {
