@@ -37,10 +37,14 @@ Note:  this means that adding or deleting a product to/from a customer also mean
 Note:  all use content-type:  application/json & Media-type:  JSON
 
 RU for Vendor...this is the entity that owns the products and the customers being tracked:
-* Fetch  Vendor info
-  *   GET  api/vendor  Note;  did not specify vendor as there is always only one
-* Update Vendor info
-  *   PUT api/vendor  
+* Fetch  Vendor info/get one vendor
+  *  GET  api/vendor  Note:  there should always only be one vendor with id-1.  Table is seeded with default on startup
+* Fetch all vendors
+  * GET api/vendors Note:  there should always only be one vendor with id-1.  Table is seeded with default on startup
+* Fetch id of only vendor
+  * GET api/vendor-id
+* Update Vendor info:  accepts vendor object including ID which should be one, but can be confirmed as above
+  *   PUT api/vendor 
 
 
 CRUD for Customers:
@@ -85,7 +89,7 @@ CRUD for Products:
 * Delete product {id}
     * DELETE api/products/{id}
 
-OtherP
+Other
 * Does Customer have this product/check to see if product {prodId} to customer {custId} exists
     * GET api/customers/{custId}/products/{prodId}
 * Fetch number of customers
@@ -93,7 +97,7 @@ OtherP
 * Fetch list of customer IDs
     * GET api/customer-ids
 * Check validity of customer id; returns true or false
-    *GET api/customers-id/{id}
+    * GET api/customers-id/{id}
 * Fetch number of products
     * GET api/products-number-of
 * Fetch list of product IDs
