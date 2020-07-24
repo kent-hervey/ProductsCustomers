@@ -17,7 +17,7 @@
 	<div class="container">
 		<h1>Welcome to Customers and Products Dashboard</h1>
 		
-		<h3>Below select to view by either products or customers showing all of our sold/active products and active customers and their associations</h3>
+		<h3>Below select to view by either products or customers showing all of our sold/active products and active customers and their associations.</h3>
 		<div class="col-25">
 		</div>
 		
